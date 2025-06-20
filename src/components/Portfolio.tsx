@@ -27,16 +27,16 @@ export const Portfolio: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen bg-brand-dark text-white py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="portfolio" className="py-20 bg-brand-dark text-white">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Our <span className="text-brand-teal">Work</span>
+            Nuestro <span className="text-brand-teal">Portfolio</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in">
-            Discover our portfolio of brand transformations. Each project represents our commitment 
-            to creating memorable, impactful brand experiences.
+            Descubre nuestro portfolio de transformaciones de marca. Cada proyecto representa nuestro compromiso 
+            de crear experiencias de marca memorables e impactantes.
           </p>
         </div>
 
