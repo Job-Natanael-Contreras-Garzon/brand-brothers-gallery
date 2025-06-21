@@ -7,7 +7,7 @@ export const Hero: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="home" className="min-h-screen bg-brand-dark text-white dark:bg-brand-dark dark:text-white bg-brand-gray-light text-brand-dark relative overflow-hidden">
+    <section id="home" className="min-h-screen bg-brand-gray-light dark:bg-brand-dark text-brand-dark dark:text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/20 to-transparent"></div>
@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
               <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                 {t('hero.title')}
               </h1>
-              <p className="text-xl text-gray-300 dark:text-gray-300 text-gray-600 max-w-lg">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-lg">
                 {t('hero.description')}
               </p>
             </div>
@@ -46,15 +46,15 @@ export const Hero: React.FC = () => {
             <div className="grid grid-cols-3 gap-8 pt-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-brand-teal">150+</div>
-                <div className="text-gray-400 dark:text-gray-400 text-gray-600">{t('hero.stats.projects')}</div>
+                <div className="text-gray-600 dark:text-gray-400">{t('hero.stats.projects')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-brand-teal">50+</div>
-                <div className="text-gray-400 dark:text-gray-400 text-gray-600">{t('hero.stats.clients')}</div>
+                <div className="text-gray-600 dark:text-gray-400">{t('hero.stats.clients')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-brand-teal">5</div>
-                <div className="text-gray-400 dark:text-gray-400 text-gray-600">{t('hero.stats.experience')}</div>
+                <div className="text-gray-600 dark:text-gray-400">{t('hero.stats.experience')}</div>
               </div>
             </div>
           </div>
@@ -63,12 +63,12 @@ export const Hero: React.FC = () => {
           <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
             <div className="relative">
               <div className="w-full h-96 bg-gradient-to-br from-brand-teal/20 to-brand-teal/5 rounded-3xl backdrop-blur-sm border border-brand-teal/30"></div>
-              <div className="absolute inset-4 bg-brand-dark-light dark:bg-brand-dark-light bg-white rounded-2xl flex items-center justify-center">
+              <div className="absolute inset-4 bg-white dark:bg-brand-dark-light rounded-2xl flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <div className="w-20 h-20 bg-brand-teal rounded-full mx-auto flex items-center justify-center">
                     <Play className="text-brand-dark" size={32} />
                   </div>
-                  <p className="text-gray-300 dark:text-gray-300 text-gray-600">Descubre nuestro proceso creativo</p>
+                  <p className="text-gray-600 dark:text-gray-300">Descubre nuestro proceso creativo</p>
                 </div>
               </div>
             </div>

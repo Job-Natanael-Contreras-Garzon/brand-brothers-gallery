@@ -29,14 +29,14 @@ export const Portfolio: React.FC = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 bg-brand-dark text-white dark:bg-brand-dark dark:text-white bg-white text-brand-dark">
+    <section id="portfolio" className="py-20 bg-white dark:bg-brand-dark text-brand-dark dark:text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
             {t('portfolio.title')}
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 dark:text-gray-300 text-gray-600 max-w-3xl mx-auto animate-fade-in">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto animate-fade-in">
             {t('portfolio.subtitle')}
           </p>
         </div>

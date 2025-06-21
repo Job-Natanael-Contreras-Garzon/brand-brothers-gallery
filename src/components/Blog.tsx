@@ -34,7 +34,7 @@ const blogPosts = [
 
 export const Blog: React.FC = () => {
   return (
-    <section id="blog" className="py-20 bg-brand-dark-light text-white">
+    <section id="blog" className="py-20 bg-brand-dark-light dark:bg-brand-dark-light text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
@@ -51,7 +51,7 @@ export const Blog: React.FC = () => {
           {blogPosts.map((post, index) => (
             <article
               key={post.id}
-              className="group bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
+              className="group bg-brand-dark dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image */}
