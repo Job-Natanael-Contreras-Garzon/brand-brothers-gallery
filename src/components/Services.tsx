@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Palette, Code, Megaphone, Camera, Search, BarChart } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const services = [
   {
@@ -42,16 +43,18 @@ const services = [
 ];
 
 export const Services: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
-    <section id="services" className="py-20 bg-brand-dark-light text-white">
+    <section id="services" className="py-20 bg-brand-dark-light text-white dark:bg-brand-dark-light dark:text-white bg-gray-50 text-brand-dark">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Nuestros <span className="text-brand-teal">Servicios</span>
+            {t('services.title')}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ofrecemos soluciones integrales de branding y marketing digital para hacer crecer tu negocio.
+          <p className="text-xl text-gray-300 dark:text-gray-300 text-gray-600 max-w-3xl mx-auto">
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -60,7 +63,7 @@ export const Services: React.FC = () => {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group p-8 bg-brand-dark rounded-2xl border border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
+              className="group p-8 bg-brand-dark dark:bg-brand-dark bg-white rounded-2xl border border-gray-800 dark:border-gray-800 border-gray-200 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="w-16 h-16 bg-brand-teal/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-teal/30 transition-colors">
@@ -71,13 +74,13 @@ export const Services: React.FC = () => {
                 {service.title}
               </h3>
               
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 dark:text-gray-300 text-gray-600 mb-6">
                 {service.description}
               </p>
               
               <ul className="space-y-2">
                 {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center text-sm text-gray-400">
+                  <li key={feature} className="flex items-center text-sm text-gray-400 dark:text-gray-400 text-gray-500">
                     <div className="w-2 h-2 bg-brand-teal rounded-full mr-3"></div>
                     {feature}
                   </li>
@@ -90,7 +93,7 @@ export const Services: React.FC = () => {
         {/* CTA */}
         <div className="text-center mt-16">
           <button className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300">
-            Solicita una consulta gratuita
+            {t('services.cta')}
           </button>
         </div>
       </div>

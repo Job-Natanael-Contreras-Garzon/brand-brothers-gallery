@@ -1,24 +1,27 @@
 
 import React, { useState } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('ES');
+  const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navItems = [
-    { name: 'Inicio', href: '#home' },
-    { name: 'Servicios', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Nosotros', href: '#about' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contacto', href: '#contact' }
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.portfolio'), href: '#portfolio' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.blog'), href: '#blog' },
+    { name: t('nav.contact'), href: '#contact' }
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-brand-dark/95 backdrop-blur-sm border-b border-brand-teal/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-brand-dark/95 backdrop-blur-sm border-b border-brand-teal/20 dark:bg-brand-dark/95 bg-white/95 dark:border-brand-teal/20 border-gray-200/20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -32,23 +35,35 @@ export const Navigation: React.FC = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-brand-teal transition-colors duration-300"
+                className="text-gray-300 hover:text-brand-teal transition-colors duration-300 dark:text-gray-300 text-gray-700 dark:hover:text-brand-teal hover:text-brand-teal"
               >
                 {item.name}
               </a>
             ))}
           </div>
 
-          {/* Language Switcher & Mobile Menu Button */}
+          {/* Controls */}
           <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-1 text-gray-300 hover:text-brand-teal">
+            {/* Theme Toggle */}
+            <button 
+              onClick={toggleTheme}
+              className="flex items-center justify-center w-10 h-10 text-gray-300 hover:text-brand-teal dark:text-gray-300 text-gray-700 dark:hover:text-brand-teal hover:text-brand-teal transition-colors"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Language Switcher */}
+            <button 
+              onClick={toggleLanguage}
+              className="flex items-center space-x-1 text-gray-300 hover:text-brand-teal dark:text-gray-300 text-gray-700 dark:hover:text-brand-teal hover:text-brand-teal transition-colors"
+            >
               <Globe size={18} />
-              <span className="text-sm">{currentLang}</span>
+              <span className="text-sm">{language.toUpperCase()}</span>
             </button>
             
             <button
               onClick={toggleMenu}
-              className="md:hidden text-gray-300 hover:text-brand-teal"
+              className="md:hidden text-gray-300 hover:text-brand-teal dark:text-gray-300 text-gray-700 dark:hover:text-brand-teal hover:text-brand-teal"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -57,12 +72,12 @@ export const Navigation: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-brand-teal/20">
+          <div className="md:hidden py-4 border-t border-brand-teal/20 dark:border-brand-teal/20 border-gray-200/20">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-300 hover:text-brand-teal transition-colors duration-300"
+                className="block py-2 text-gray-300 hover:text-brand-teal transition-colors duration-300 dark:text-gray-300 text-gray-700 dark:hover:text-brand-teal hover:text-brand-teal"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
