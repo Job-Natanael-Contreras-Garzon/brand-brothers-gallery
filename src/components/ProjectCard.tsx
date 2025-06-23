@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { type Project } from '../data/portfolioData';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ProjectCardProps {
   project: Project;
@@ -9,13 +10,15 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, delay = 0 }) => {
+  const { t } = useLanguage();
+
   return (
     <div 
       className="group cursor-pointer animate-fade-in"
       style={{ animationDelay: `${delay}ms` }}
       onClick={onClick}
     >
-      <div className="relative overflow-hidden rounded-2xl bg-brand-dark-light transition-all duration-500 group-hover:transform group-hover:scale-[1.02] group-hover:shadow-2xl">
+      <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-brand-dark-light border border-gray-200 dark:border-gray-800 transition-all duration-500 group-hover:transform group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:border-brand-teal/50">
         {/* Image Container */}
         <div className="relative aspect-[4/3] overflow-hidden">
           <img 
@@ -38,13 +41,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, dela
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
+          <h3 className="text-xl md:text-2xl font-bold text-brand-dark dark:text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
             {project.title}
           </h3>
-          <p className="text-gray-300 text-sm md:text-base mb-4">
+          <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-4">
             {project.subtitle}
           </p>
-          <p className="text-gray-400 text-sm line-clamp-2">
+          <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-2">
             {project.description}
           </p>
           
@@ -53,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, dela
             {project.tags.slice(0, 2).map((tag) => (
               <span 
                 key={tag}
-                className="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded"
+                className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
               >
                 {tag}
               </span>
@@ -63,7 +66,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, dela
 
         {/* View Project Button */}
         <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-          <div className="w-12 h-12 bg-brand-teal rounded-full flex items-center justify-center text-brand-dark">
+          <div className="w-12 h-12 bg-brand-teal rounded-full flex items-center justify-center text-brand-dark shadow-lg">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

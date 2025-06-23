@@ -11,37 +11,61 @@ export const Services: React.FC = () => {
       icon: Palette,
       title: t('services.branding.title'),
       description: t('services.branding.description'),
-      features: ['Logotipos', 'Manual de marca', 'Papelería corporativa']
+      features: [
+        t('services.branding.features.0'),
+        t('services.branding.features.1'),
+        t('services.branding.features.2')
+      ]
     },
     {
       icon: Code,
       title: t('services.web.title'),
       description: t('services.web.description'),
-      features: ['Diseño responsivo', 'E-commerce', 'CMS personalizado']
+      features: [
+        t('services.web.features.0'),
+        t('services.web.features.1'),
+        t('services.web.features.2')
+      ]
     },
     {
       icon: Megaphone,
       title: t('services.marketing.title'),
       description: t('services.marketing.description'),
-      features: ['Redes sociales', 'Email marketing', 'Publicidad online']
+      features: [
+        t('services.marketing.features.0'),
+        t('services.marketing.features.1'),
+        t('services.marketing.features.2')
+      ]
     },
     {
       icon: Camera,
       title: t('services.photography.title'),
       description: t('services.photography.description'),
-      features: ['Producto', 'Corporativa', 'Eventos']
+      features: [
+        t('services.photography.features.0'),
+        t('services.photography.features.1'),
+        t('services.photography.features.2')
+      ]
     },
     {
       icon: Search,
       title: t('services.seo.title'),
       description: t('services.seo.description'),
-      features: ['Optimización SEO', 'Google Ads', 'Analytics']
+      features: [
+        t('services.seo.features.0'),
+        t('services.seo.features.1'),
+        t('services.seo.features.2')
+      ]
     },
     {
       icon: BarChart,
       title: t('services.consulting.title'),
       description: t('services.consulting.description'),
-      features: ['Análisis de marca', 'Estrategia digital', 'Plan de marketing']
+      features: [
+        t('services.consulting.features.0'),
+        t('services.consulting.features.1'),
+        t('services.consulting.features.2')
+      ]
     }
   ];
 

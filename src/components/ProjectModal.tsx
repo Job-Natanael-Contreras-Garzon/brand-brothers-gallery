@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { type Project } from '../data/portfolioData';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ProjectModalProps {
   project: Project;
@@ -9,6 +10,8 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -46,11 +49,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
       />
       
       {/* Modal Content */}
-      <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-brand-dark-light rounded-3xl animate-scale-in">
+      <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-brand-dark-light rounded-3xl animate-scale-in border border-gray-200 dark:border-gray-800">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 w-10 h-10 bg-brand-teal/20 hover:bg-brand-teal/30 rounded-full flex items-center justify-center text-white transition-colors duration-200"
+          className="absolute top-6 right-6 z-10 w-10 h-10 bg-brand-teal/20 hover:bg-brand-teal/30 rounded-full flex items-center justify-center text-brand-dark dark:text-white transition-colors duration-200"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -64,7 +67,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
             alt={project.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-light/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           
           {/* Project Info Overlay */}
           <div className="absolute bottom-8 left-8">
@@ -85,18 +88,24 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           {/* Project Details */}
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">Client</h4>
-              <p className="text-white">{project.client}</p>
+              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
+                {t('portfolio.modal.client')}
+              </h4>
+              <p className="text-brand-dark dark:text-white">{project.client}</p>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">Year</h4>
-              <p className="text-white">{project.year}</p>
+              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
+                {t('portfolio.modal.year')}
+              </h4>
+              <p className="text-brand-dark dark:text-white">{project.year}</p>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">Services</h4>
+              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
+                {t('portfolio.modal.services')}
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="text-sm text-gray-300 bg-gray-800 px-3 py-1 rounded">
+                  <span key={tag} className="text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">
                     {tag}
                   </span>
                 ))}
@@ -107,31 +116,39 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           {/* Project Description */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
+                {t('portfolio.modal.overview')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
                 {project.description}
               </p>
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">The Challenge</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
+                {t('portfolio.modal.challenge')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {project.challenge}
               </p>
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Our Solution</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
+                {t('portfolio.modal.solution')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {project.solution}
               </p>
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Results</h3>
+              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
+                {t('portfolio.modal.results')}
+              </h3>
               <ul className="space-y-3">
                 {project.results.map((result, index) => (
-                  <li key={index} className="flex items-center text-gray-300">
+                  <li key={index} className="flex items-center text-gray-600 dark:text-gray-300">
                     <div className="w-2 h-2 bg-brand-teal rounded-full mr-4 flex-shrink-0" />
                     {result}
                   </li>
