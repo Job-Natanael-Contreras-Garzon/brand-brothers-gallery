@@ -28,6 +28,11 @@ export const About: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const getValueText = (key: string, fallback: string) => {
+    const translation = t(key);
+    return translation && translation !== key ? translation : fallback;
+  };
+
   const values = [
     {
       icon: Target,
@@ -60,13 +65,13 @@ export const About: React.FC = () => {
             <div className="space-y-8 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
               <div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                  {t('about.title')}
+                  {getValueText('about.title', 'Sobre Nosotros')}
                 </h2>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-                  {t('about.description1')}
+                  {getValueText('about.description1', 'Somos un equipo apasionado de creativos y estrategas digitales con más de 5 años de experiencia ayudando a empresas a construir marcas memorables.')}
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">
-                  {t('about.description2')}
+                  {getValueText('about.description2', 'En Branding Brothers, creemos que cada marca tiene una historia única que contar. Nuestro trabajo es encontrar esa historia y comunicarla de manera efectiva a través del diseño, la estrategia y la tecnología.')}
                 </p>
               </div>
 
@@ -74,30 +79,40 @@ export const About: React.FC = () => {
               <div className="grid grid-cols-2 gap-8">
                 <div className="animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '200ms' }}>
                   <div className="text-3xl font-bold text-brand-teal mb-2">150+</div>
-                  <div className="text-gray-500 dark:text-gray-400">{t('about.stats.projects')}</div>
+                  <div className="text-gray-500 dark:text-gray-400">
+                    {getValueText('about.stats.projects', 'Proyectos exitosos')}
+                  </div>
                 </div>
                 <div className="animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
                   <div className="text-3xl font-bold text-brand-teal mb-2">98%</div>
-                  <div className="text-gray-500 dark:text-gray-400">{t('about.stats.clients')}</div>
+                  <div className="text-gray-500 dark:text-gray-400">
+                    {getValueText('about.stats.clients', 'Clientes satisfechos')}
+                  </div>
                 </div>
                 <div className="animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '400ms' }}>
                   <div className="text-3xl font-bold text-brand-teal mb-2">24/7</div>
-                  <div className="text-gray-500 dark:text-gray-400">{t('about.stats.support')}</div>
+                  <div className="text-gray-500 dark:text-gray-400">
+                    {getValueText('about.stats.support', 'Soporte disponible')}
+                  </div>
                 </div>
                 <div className="animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '500ms' }}>
                   <div className="text-3xl font-bold text-brand-teal mb-2">5+</div>
-                  <div className="text-gray-500 dark:text-gray-400">{t('about.stats.experience')}</div>
+                  <div className="text-gray-500 dark:text-gray-400">
+                    {getValueText('about.stats.experience', 'Años de experiencia')}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Values */}
             <div className="space-y-6 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '200ms' }}>
-              <h3 className="text-2xl font-bold mb-8">{t('about.values')}</h3>
+              <h3 className="text-2xl font-bold mb-8">
+                {getValueText('about.values', 'Nuestros Valores')}
+              </h3>
               
               {values.map((value, index) => (
                 <div
-                  key={value.title}
+                  key={`value-${index}`}
                   className="flex items-start space-x-4 p-6 bg-gray-50 dark:bg-brand-dark-light rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 animate-on-scroll translate-y-20 opacity-0"
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
