@@ -51,19 +51,19 @@ export const About: React.FC = () => {
             <div className="grid grid-cols-2 gap-8">
               <div>
                 <div className="text-3xl font-bold text-brand-teal mb-2">150+</div>
-                <div className="text-gray-500 dark:text-gray-400">Proyectos exitosos</div>
+                <div className="text-gray-500 dark:text-gray-400">{t('about.stats.projects')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-brand-teal mb-2">98%</div>
-                <div className="text-gray-500 dark:text-gray-400">Clientes satisfechos</div>
+                <div className="text-gray-500 dark:text-gray-400">{t('about.stats.clients')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-brand-teal mb-2">24/7</div>
-                <div className="text-gray-500 dark:text-gray-400">Soporte disponible</div>
+                <div className="text-gray-500 dark:text-gray-400">{t('about.stats.support')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-brand-teal mb-2">5+</div>
-                <div className="text-gray-500 dark:text-gray-400">Años de experiencia</div>
+                <div className="text-gray-500 dark:text-gray-400">{t('about.stats.experience')}</div>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const blogPosts = [
   {
@@ -33,16 +34,18 @@ const blogPosts = [
 ];
 
 export const Blog: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="blog" className="py-20 bg-brand-dark-light dark:bg-brand-dark-light text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Nuestro <span className="text-brand-teal">Blog</span>
+            {t('blog.title')}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Mantente al día con las últimas tendencias, consejos y insights del mundo del branding y marketing digital.
+            {t('blog.subtitle')}
           </p>
         </div>
 
@@ -51,7 +54,7 @@ export const Blog: React.FC = () => {
           {blogPosts.map((post, index) => (
             <article
               key={post.id}
-              className="group bg-brand-dark dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
+              className="group bg-white dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in text-brand-dark dark:text-white"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image */}
@@ -73,12 +76,12 @@ export const Blog: React.FC = () => {
                 <h3 className="text-xl font-bold mb-3 group-hover:text-brand-teal transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                   {post.excerpt}
                 </p>
 
                 {/* Meta */}
-                <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-1">
                       <User size={14} />
@@ -93,7 +96,7 @@ export const Blog: React.FC = () => {
 
                 {/* Read More */}
                 <button className="group/btn flex items-center space-x-2 text-brand-teal hover:text-brand-teal-light transition-colors">
-                  <span>Leer más</span>
+                  <span>{t('blog.readMore')}</span>
                   <ArrowRight className="group-hover/btn:translate-x-1 transition-transform" size={16} />
                 </button>
               </div>
@@ -104,7 +107,7 @@ export const Blog: React.FC = () => {
         {/* CTA */}
         <div className="text-center">
           <button className="border-2 border-brand-teal text-brand-teal px-8 py-4 rounded-full font-semibold hover:bg-brand-teal hover:text-brand-dark transition-all duration-300">
-            Ver todos los artículos
+            {t('blog.viewAll')}
           </button>
         </div>
       </div>

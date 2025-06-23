@@ -3,47 +3,47 @@ import React from 'react';
 import { Palette, Code, Megaphone, Camera, Search, BarChart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const services = [
-  {
-    icon: Palette,
-    title: 'Diseño de Marca',
-    description: 'Creamos identidades visuales únicas que reflejan la esencia de tu empresa.',
-    features: ['Logotipos', 'Manual de marca', 'Papelería corporativa']
-  },
-  {
-    icon: Code,
-    title: 'Desarrollo Web',
-    description: 'Sitios web modernos, responsivos y optimizados para conversión.',
-    features: ['Diseño responsivo', 'E-commerce', 'CMS personalizado']
-  },
-  {
-    icon: Megaphone,
-    title: 'Marketing Digital',
-    description: 'Estrategias digitales que impulsan el crecimiento de tu negocio.',
-    features: ['Redes sociales', 'Email marketing', 'Publicidad online']
-  },
-  {
-    icon: Camera,
-    title: 'Fotografía Comercial',
-    description: 'Imágenes profesionales que comunican la calidad de tu marca.',
-    features: ['Producto', 'Corporativa', 'Eventos']
-  },
-  {
-    icon: Search,
-    title: 'SEO & SEM',
-    description: 'Mejoramos tu visibilidad online y aumentamos tu tráfico orgánico.',
-    features: ['Optimización SEO', 'Google Ads', 'Analytics']
-  },
-  {
-    icon: BarChart,
-    title: 'Consultoría',
-    description: 'Asesoramiento estratégico para el crecimiento de tu marca.',
-    features: ['Análisis de marca', 'Estrategia digital', 'Plan de marketing']
-  }
-];
-
 export const Services: React.FC = () => {
   const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Palette,
+      title: t('services.branding.title'),
+      description: t('services.branding.description'),
+      features: ['Logotipos', 'Manual de marca', 'Papelería corporativa']
+    },
+    {
+      icon: Code,
+      title: t('services.web.title'),
+      description: t('services.web.description'),
+      features: ['Diseño responsivo', 'E-commerce', 'CMS personalizado']
+    },
+    {
+      icon: Megaphone,
+      title: t('services.marketing.title'),
+      description: t('services.marketing.description'),
+      features: ['Redes sociales', 'Email marketing', 'Publicidad online']
+    },
+    {
+      icon: Camera,
+      title: t('services.photography.title'),
+      description: t('services.photography.description'),
+      features: ['Producto', 'Corporativa', 'Eventos']
+    },
+    {
+      icon: Search,
+      title: t('services.seo.title'),
+      description: t('services.seo.description'),
+      features: ['Optimización SEO', 'Google Ads', 'Analytics']
+    },
+    {
+      icon: BarChart,
+      title: t('services.consulting.title'),
+      description: t('services.consulting.description'),
+      features: ['Análisis de marca', 'Estrategia digital', 'Plan de marketing']
+    }
+  ];
 
   return (
     <section id="services" className="py-20 bg-gray-50 dark:bg-brand-dark-light text-brand-dark dark:text-white">
