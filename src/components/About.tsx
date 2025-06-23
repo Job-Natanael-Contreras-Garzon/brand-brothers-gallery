@@ -3,34 +3,34 @@ import React from 'react';
 import { Users, Award, Target, Heart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const values = [
-  {
-    icon: Target,
-    title: 'Enfoque',
-    description: 'Nos centramos en resultados medibles y objetivos claros.'
-  },
-  {
-    icon: Heart,
-    title: 'Pasión',
-    description: 'Amamos lo que hacemos y se refleja en cada proyecto.'
-  },
-  {
-    icon: Users,
-    title: 'Colaboración',
-    description: 'Trabajamos como un equipo con nuestros clientes.'
-  },
-  {
-    icon: Award,
-    title: 'Excelencia',
-    description: 'Buscamos la perfección en cada detalle.'
-  }
-];
-
 export const About: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const values = [
+    {
+      icon: Target,
+      title: language === 'es' ? 'Enfoque' : 'Focus',
+      description: language === 'es' ? 'Nos centramos en resultados medibles y objetivos claros.' : 'We focus on measurable results and clear objectives.'
+    },
+    {
+      icon: Heart,
+      title: language === 'es' ? 'Pasión' : 'Passion',
+      description: language === 'es' ? 'Amamos lo que hacemos y se refleja en cada proyecto.' : 'We love what we do and it shows in every project.'
+    },
+    {
+      icon: Users,
+      title: language === 'es' ? 'Colaboración' : 'Collaboration',
+      description: language === 'es' ? 'Trabajamos como un equipo con nuestros clientes.' : 'We work as a team with our clients.'
+    },
+    {
+      icon: Award,
+      title: language === 'es' ? 'Excelencia' : 'Excellence',
+      description: language === 'es' ? 'Buscamos la perfección en cada detalle.' : 'We seek perfection in every detail.'
+    }
+  ];
 
   return (
-    <section id="about" className="py-20 bg-brand-gray-light dark:bg-brand-dark text-brand-dark dark:text-white">
+    <section id="about" className="py-20 bg-white dark:bg-brand-dark text-brand-dark dark:text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
@@ -75,7 +75,7 @@ export const About: React.FC = () => {
             {values.map((value, index) => (
               <div
                 key={value.title}
-                className="flex items-start space-x-4 p-6 bg-white dark:bg-brand-dark-light rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300"
+                className="flex items-start space-x-4 p-6 bg-gray-50 dark:bg-brand-dark-light rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-brand-teal/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <value.icon className="text-brand-teal" size={24} />
