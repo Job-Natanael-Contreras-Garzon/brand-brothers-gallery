@@ -13,7 +13,7 @@ const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(portfolioData);
-  const [viewedProjects, setViewedProjects] = useState<Set<number>>(new Set());
+  const [viewedProjects, setViewedProjects] = useState<Set<string>>(new Set()); // Changed to Set<string>
   const { t } = useLanguage();
 
   // Load viewed projects from localStorage
@@ -39,7 +39,7 @@ const Portfolio = () => {
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
-    setViewedProjects(prev => new Set([...prev, project.id]));
+    setViewedProjects(prev => new Set([...prev, project.id])); // Now project.id is string, matches Set<string>
   };
 
   const handleCloseModal = () => {

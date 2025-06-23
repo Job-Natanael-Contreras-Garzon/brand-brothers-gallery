@@ -8,6 +8,7 @@ export interface Project {
   category: FilterCategory;
   categoryName: string;
   image: string;
+  video?: string; // Add optional video property
   description: string;
   challenge: string;
   solution: string;
