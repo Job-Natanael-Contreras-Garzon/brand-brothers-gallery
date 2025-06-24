@@ -3,11 +3,27 @@ import React from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import { Users, Award, Target, Heart, Star, Coffee, Lightbulb, Shield } from 'lucide-react';
 
 const About = () => {
   const { t, language } = useLanguage();
-
+  const navigate = useNavigate();
+  const handleNavigation = (path: string, sectionId?: string) => {
+    if (path === '/') {
+      navigate('/');
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+    }
+  };
   const values = [
     {
       icon: Target,
@@ -205,7 +221,10 @@ const About = () => {
               : 'Let\'s transform your idea into a powerful brand that connects with your audience.'
             }
           </p>
-          <button className="bg-brand-dark text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-dark/90 transition-all duration-300 shadow-lg hover:shadow-xl">
+          <button 
+          className="bg-brand-dark text-white px-8 py-4 rounded-full 
+          font-semibold hover:bg-brand-dark/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+          onClick={() => handleNavigation('/', 'contact')}>
             {language === 'es' ? 'Comencemos un proyecto' : 'Start a project'}
           </button>
         </div>
