@@ -14,7 +14,21 @@ export const Services: React.FC = () => {
     setSelectedService(service);
     setIsModalOpen(true);
   };
-
+   const handleNavigation = (path: string, sectionId?: string) => {
+    if (path === '/') {
+      navigate('/');
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+    }
+  };
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
@@ -167,13 +181,13 @@ export const Services: React.FC = () => {
               {/* Botones de acción */}
               <div className="flex w-full gap-4 mt-2">
                 <button
-                  onClick={() => { closeModal(); navigate('/contacto'); }}
+                  onClick={() => { closeModal(); handleNavigation('/', 'contact'); }}
                   className="flex-1 bg-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal-light transition-all duration-300 shadow"
                 >
                   Contactar
                 </button>
                 <button
-                  onClick={() => { closeModal(); navigate('/portafolio'); }}
+                  onClick={() => { closeModal(); navigate('/portfolio'); }}
                   className="flex-1 bg-brand-dark border border-brand-teal text-brand-teal py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
                 >
                   Portafolio
