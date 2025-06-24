@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react'; // Importa useEffect y useRef
 import { Button } from './ui/button'; // Asumo que tienes este componente de UI
 import { ArrowRight, Heart, Eye } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext'; // Ruta adaptada
@@ -7,36 +6,59 @@ import ClientCarousel from './cliente-carousel';
 
 // Nota: Para que los videos de TikTok se muestren, necesitarás añadir el siguiente script en tu archivo HTML principal.
 // <script async src="https://www.tiktok.com/embed.js"></script>
+// ¡Asegúrate de que este script esté activo en tu HTML!
 
 const featuredVideos = [
   {
-    url: 'https://www.tiktok.com/@brandingbrothers.bo/video/7511044217959877893',
-    id: '7511044217959877893',
+    // CAMBIA ESTAS URLs Y IDs POR URLs REALES DE TIKTOK Y SUS CORRESPONDIENTES IDs
+    url: 'https://www.tiktok.com/@tiktok/video/7511044217959877893', // Ejemplo: Reemplazar con la URL real del video de TikTok
+    id: '7511044217959877893', // Este ID debe coincidir con el de la URL de TikTok
     likes: '1.2M',
     views: '10.5M',
-    positioning: 'lg:top-[2rem] lg:right-[25%] rotate-[8deg]',
-    size: 'w-[150px]'
+    positioning: 'lg:top-[-2rem] lg:right-[-10%] rotate-[8deg]',
+    size: 'w-[250px]'
   },
   {
-    url: 'https://www.tiktok.com/@brandingbrothers.bo/video/7510768624664202502',
-    id: '7510768624664202502',
+    url: 'https://www.tiktok.com/@tiktok/video/7510768624664202502', // Ejemplo
+    id: '7510768624664202502', // Este ID debe coincidir con el de la URL de TikTok
     likes: '890K',
     views: '8.2M',
-    positioning: 'lg:top-[0] lg:left-[25%] rotate-[-8deg]',
-    size: 'w-[150px]'
-  },
-  {
-    url: 'https://www.tiktok.com/@brandingbrothers.bo/video/7511762277725424902',
-    id: '7511762277725424902',
-    likes: '2.5M',
-    views: '22.1M',
-    positioning: 'lg:top-[5rem] lg:left-1/2 -translate-x-1/2 rotate-[-2deg] z-10',
-    size: 'w-[150px]'
+    positioning: 'lg:top-[-2rem] lg:left-[25%] rotate-[-8deg]',
+    size: 'w-[250px]'
   },
 ];
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); // Para los videos locales (si los hubieras usado)
+
+  // useEffect para re-renderizar embeds de TikTok si la lista cambia (no es estrictamente necesario aquí si la lista es fija)
+  // o para observar los elementos y cargarlos si aparecen en el viewport.
+  // Sin embargo, el script de TikTok suele escanear el DOM automáticamente.
+  // Si sigues teniendo problemas, es posible que necesites un `useEffect` para llamar manualmente a TikTok para re-escanear.
+  useEffect(() => {
+    // Esto es un hack si TikTok no re-escanea automáticamente después de montar los componentes
+    // Es mejor verificar la documentación oficial de TikTok para embeds en React.
+    // Una solución común es que, después de que los elementos sean inyectados en el DOM,
+    // se le indique al script de TikTok que los procese.
+    // Si la función `window.tiktok.analytics.track` o similar existe, podrías llamarla.
+    // O simplemente, asegurarse de que el script cargue *después* de que el HTML esté listo.
+
+    // Si estás en un entorno de desarrollo (Next.js, Vite), y ves que el script de TikTok no se ejecuta
+    // cuando el componente se monta, podrías intentar una recarga forzada de los embeds:
+    if (window.tiktok && typeof (window as any).tiktok.EmbedElement === 'function') {
+      // Esta es una suposición de cómo TikTok podría exponer una forma de re-escanear.
+      // Podrías necesitar buscar en la consola del navegador si hay errores o si tiktok-embed.js expone una API.
+      // Alternativamente, puedes forzar una pequeña demora para que el DOM se asiente antes de que el script de TikTok lo escanee.
+      setTimeout(() => {
+        // Esto es un "hack" y puede no ser la solución ideal.
+        // La mejor práctica es que el script de TikTok se ejecute después de que todo el DOM esté listo.
+        // Si usas un CMS o constructor de páginas, ellos suelen manejar esto.
+        // Si no funciona, considera la Opción 2 (videos locales) o un componente React de terceros para TikTok embeds.
+      }, 500);
+    }
+  }, []);
+
 
   return (
     <section id="home" className="relative w-full overflow-hidden flex flex-col min-h-screen dark">
@@ -49,6 +71,8 @@ export const Hero: React.FC = () => {
           playsInline
           className="w-full h-full object-cover"
           data-ai-hint="drone footage city"
+          // Añade un 'poster' para una imagen de vista previa
+          poster="https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg"
         />
         <div className="absolute inset-0 bg-black/70"></div>
       </div>
@@ -69,7 +93,7 @@ export const Hero: React.FC = () => {
             >
               {t('home.slogan')}
             </p>
-                        <div
+            <div
               className="mt-10 flex items-center justify-center lg:justify-start gap-x-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '0.6s' }}
             >
@@ -89,31 +113,33 @@ export const Hero: React.FC = () => {
             {featuredVideos.map((video) => (
               <div key={video.id} className={`absolute group transition-transform duration-300 hover:scale-110 hover:z-20 ${video.positioning} ${video.size}`}>
                 <div className="bg-black rounded-lg shadow-2xl overflow-hidden aspect-[9/16]">
+                    {/* El blockquote de TikTok debe ser la URL del video de TikTok */}
                    <blockquote
-                      className="tiktok-embed w-full h-full"
-                      cite={video.url}
-                      data-video-id={video.id}
-                      style={{
-                        maxWidth: '100%',
-                        width: '100%',
-                        minHeight: '100%',
-                        height: '100%',
-                      }}
-                    >
-                      <section className="p-2 bg-black text-foreground text-xs">
-                        <a target="_blank" rel="noopener noreferrer" href={video.url}>@{video.url.split('/')[3]} on TikTok</a>
-                      </section>
+                     className="tiktok-embed w-full h-full"
+                     cite={video.url} // Asegúrate que esta sea la URL completa del video de TikTok
+                     data-video-id={video.id} // Asegúrate que este sea el ID correcto del video de TikTok
+                     style={{
+                       maxWidth: '100%',
+                       width: '100%',
+                       minHeight: '100%',
+                       height: '100%',
+                     }}
+                   >
+                     {/* Este contenido dentro del blockquote es para SEO y fallback, no para el reproductor en sí */}
+                     <section className="p-2 bg-black text-white text-xs"> {/* Cambiado a text-white para que se vea */}
+                       <a target="_blank" rel="noopener noreferrer" href={video.url}>Ver en TikTok</a> {/* Cambiado el texto */}
+                     </section>
                    </blockquote>
                 </div>
                 <div className="mt-2 text-foreground/90 text-xs font-semibold flex justify-end items-center gap-3">
-                    <div className="flex items-center gap-1">
-                        <Heart className="h-3 w-3 text-red-500 fill-current"/>
-                        <span>{video.likes}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <Eye className="h-3 w-3"/>
-                        <span>{video.views}</span>
-                    </div>
+                  <div className="flex items-center gap-1">
+                    <Heart className="h-3 w-3 text-red-500 fill-current"/>
+                    <span>{video.likes}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Eye className="h-3 w-3"/>
+                    <span>{video.views}</span>
+                  </div>
                 </div>
               </div>
             ))}
