@@ -75,7 +75,7 @@ const About = () => {
     {
       name: 'María González',
       role: language === 'es' ? 'Directora Creativa' : 'Creative Director',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+      image: '/lovable-uploads/a1bdcf9d-55cc-420c-9f92-85506d8a3341.png',
       bio: language === 'es' ? 'Visionaria del diseño con 10+ años creando marcas icónicas.' : 'Design visionary with 10+ years creating iconic brands.',
       specialty: language === 'es' ? 'Branding Visual' : 'Visual Branding',
       gradient: 'from-pink-500 to-violet-500',
