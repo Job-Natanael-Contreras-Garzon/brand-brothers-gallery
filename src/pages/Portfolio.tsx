@@ -392,8 +392,8 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Portfolio Grid/List */}
-      <section className="py-20">
+      {/* Filters and Project Grid */}
+      <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
