@@ -1,7 +1,7 @@
-
 import React, { useEffect } from 'react';
 import { type Project } from '../data/portfolioData';
 import { useLanguage } from '../contexts/LanguageContext';
+import { ExternalLink, Github, X, Play } from 'lucide-react';
 
 interface ProjectModalProps {
   project: Project;
@@ -41,119 +41,195 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/90 backdrop-blur-sm animate-fade-in"
+      <div
+        className="absolute inset-0 bg-black/60 cursor-pointer"
         onClick={onClose}
       />
-      
-      {/* Modal Content */}
-      <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-brand-dark-light rounded-3xl animate-scale-in border border-gray-200 dark:border-gray-800">
+
+      {/* Modal Content - Tamaño controlado */}
+      <div className="relative w-full max-w-4xl max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden animate-scale-in border border-gray-700/50 shadow-2xl">
+        
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 w-10 h-10 bg-brand-teal/20 hover:bg-brand-teal/30 rounded-full flex items-center justify-center text-brand-dark dark:text-white transition-colors duration-200"
+          className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X className="w-5 h-5" />
         </button>
 
-        {/* Hero Image */}
-        <div className="relative aspect-[16/9] overflow-hidden rounded-t-3xl">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        {/* Modal Layout */}
+        <div className="flex flex-col md:flex-row h-full max-h-[90vh]">
           
-          {/* Project Info Overlay */}
-          <div className="absolute bottom-8 left-8">
-            <span className="inline-block px-4 py-2 text-sm font-medium bg-brand-teal text-brand-dark rounded-full mb-4">
-              {project.categoryName}
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              {project.title}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {project.subtitle}
-            </p>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="p-8 md:p-12">
-          {/* Project Details */}
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
-                {t('portfolio.modal.client')}
-              </h4>
-              <p className="text-brand-dark dark:text-white">{project.client}</p>
-            </div>
-            <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
-                {t('portfolio.modal.year')}
-              </h4>
-              <p className="text-brand-dark dark:text-white">{project.year}</p>
-            </div>
-            <div>
-              <h4 className="text-sm font-bold text-brand-teal uppercase tracking-wider mb-2">
-                {t('portfolio.modal.services')}
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">
-                    {tag}
-                  </span>
-                ))}
+          {/* Left Side - Media */}
+          <div className="relative w-full md:w-3/5 h-64 md:h-auto bg-gray-800">
+            {/* Media Container */}
+            <div className="relative w-full h-full">
+              {project.video ? (
+                <video
+                  src={project.video}
+                  className="w-full h-full object-cover"
+                  controls // Asegura que los controles nativos estén habilitados
+                  autoPlay
+                  loop
+                  muted
+                  poster={project.image || ''}
+                />
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              )}
+              
+              {/* Gradiente sutil para el overlay de información - AHORA CON pointer-events-none */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Info overlay solo en mobile - AHORA CON pointer-events-none */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:hidden pointer-events-none">
+                <span className="inline-block px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md mb-2 uppercase tracking-wider">
+                  {project.categoryName}
+                </span>
+                <h2 className="text-xl font-bold text-white mb-1">
+                  {project.title}
+                </h2>
+                <p className="text-sm text-gray-300">
+                  {project.subtitle}
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Project Description */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
-                {t('portfolio.modal.overview')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                {project.description}
-              </p>
-            </div>
+          {/* Right Side - Content */}
+          <div className="w-full md:w-2/5 flex flex-col bg-gray-900">
+            <div className="p-6 overflow-y-auto flex-1 space-y-6">
+              
+              {/* Header Info - Solo visible en desktop */}
+              <div className="hidden md:block space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="inline-block px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md uppercase tracking-wider">
+                    {project.categoryName}
+                  </span>
+                  <span className="text-gray-400 text-sm">{project.year}</span>
+                </div>
+                
+                <h2 className="text-2xl font-bold text-white leading-tight">
+                  {project.title}
+                </h2>
+                
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {project.subtitle}
+                </p>
+              </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
-                {t('portfolio.modal.challenge')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                {project.challenge}
-              </p>
-            </div>
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 w-full bg-white text-black px-4 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4 fill-current" /> {/* Cambiado a ExternalLink para más coherencia con enlaces externos */}
+                    <span>{t('portfolio.modal.liveDemo')}</span>
+                  </a>
+                )}
+                
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 w-full bg-gray-700 text-white px-4 py-3 rounded-lg font-bold text-sm hover:bg-gray-600 transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>{t('portfolio.modal.viewCode')}</span>
+                  </a>
+                )}
+              </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
-                {t('portfolio.modal.solution')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                {project.solution}
-              </p>
-            </div>
+              {/* Project Info */}
+              <div className="space-y-4">
+                
+                {/* Client */}
+                <div>
+                  <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">
+                    {t('portfolio.modal.client')}
+                  </h4>
+                  <p className="text-white text-sm">{project.client}</p>
+                </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-brand-dark dark:text-white mb-4">
-                {t('portfolio.modal.results')}
-              </h3>
-              <ul className="space-y-3">
-                {project.results.map((result, index) => (
-                  <li key={index} className="flex items-center text-gray-600 dark:text-gray-300">
-                    <div className="w-2 h-2 bg-brand-teal rounded-full mr-4 flex-shrink-0" />
-                    {result}
-                  </li>
-                ))}
-              </ul>
+                {/* Services/Tags */}
+                <div>
+                  <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                    {t('portfolio.modal.services')}
+                  </h4>
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="text-xs text-gray-300 bg-gray-800 px-2 py-1 rounded border border-gray-700"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div>
+                  <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                    {t('portfolio.modal.overview')}
+                  </h4>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Challenge */}
+                {project.challenge && (
+                  <div>
+                    <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                      {t('portfolio.modal.challenge')}
+                    </h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {project.challenge}
+                    </p>
+                  </div>
+                )}
+
+                {/* Solution */}
+                {project.solution && (
+                  <div>
+                    <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                      {t('portfolio.modal.solution')}
+                    </h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {project.solution}
+                    </p>
+                  </div>
+                )}
+
+                {/* Results */}
+                {project.results && project.results.length > 0 && (
+                  <div>
+                    <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                      {t('portfolio.modal.results')}
+                    </h4>
+                    <ul className="space-y-2">
+                      {project.results.map((result, index) => (
+                        <li key={index} className="flex items-start text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 mt-2 flex-shrink-0" />
+                          <span>{result}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
