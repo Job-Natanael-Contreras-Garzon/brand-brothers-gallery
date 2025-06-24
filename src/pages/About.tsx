@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,6 +9,28 @@ import { Users, Award, Target, Heart, Star, Coffee, Lightbulb, Shield, Palette, 
 const About = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+            entry.target.classList.remove('translate-y-20', 'opacity-0');
+          } else {
+            entry.target.classList.remove('animate-slide-up');
+            entry.target.classList.add('translate-y-20', 'opacity-0');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   
   const handleNavigation = (path: string, sectionId?: string) => {
     if (path === '/') {
@@ -76,7 +98,6 @@ const About = () => {
       name: 'María González',
       role: language === 'es' ? 'Directora Creativa' : 'Creative Director',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-
       bio: language === 'es' ? 'Visionaria del diseño con 10+ años creando marcas icónicas.' : 'Design visionary with 10+ years creating iconic brands.',
       specialty: language === 'es' ? 'Branding Visual' : 'Visual Branding',
       gradient: 'from-pink-500 to-violet-500',
@@ -95,7 +116,6 @@ const About = () => {
       name: 'Ana López',
       role: language === 'es' ? 'Directora de Crecimiento' : 'Growth Director',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-
       bio: language === 'es' ? 'Experta en escalar marcas y maximizar su impacto digital.' : 'Expert in scaling brands and maximizing digital impact.',
       specialty: language === 'es' ? 'Growth Hacking' : 'Growth Hacking',
       gradient: 'from-emerald-500 to-teal-500',
@@ -138,7 +158,7 @@ const About = () => {
     <div className="min-h-screen bg-white dark:bg-brand-dark overflow-x-hidden">
       <Navigation />
       
-      {/* Hero Section - Con toques neón */}
+      {/* Hero Section - Con toques neón y animaciones */}
       <section className="relative pt-32 pb-20 bg-gradient-to-br from-brand-teal/5 via-purple-50/30 to-pink-50/20 dark:from-brand-dark dark:via-brand-dark-light dark:to-brand-dark">
         {/* Elementos decorativos de fondo con neón */}
         <div className="absolute inset-0 overflow-hidden">
@@ -149,12 +169,12 @@ const About = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent text-sm font-semibold mb-4 animate-fade-in">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent text-sm font-semibold mb-4 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
               <Sparkles size={16} className="text-brand-teal drop-shadow-sm shadow-brand-teal/50" />
               {language === 'es' ? 'CREATIVOS • ESTRATEGAS • VISIONARIOS' : 'CREATIVES • STRATEGISTS • VISIONARIES'}
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-bold text-brand-dark dark:text-white mb-8 animate-fade-in">
+            <h1 className="text-6xl md:text-8xl font-bold text-brand-dark dark:text-white mb-8 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
               <span className="bg-gradient-to-r from-brand-teal via-purple-600 to-pink-600 bg-clip-text text-transparent drop-shadow-lg">
                 {language === 'es' ? 'Somos' : 'We Are'}
               </span>
@@ -165,7 +185,7 @@ const About = () => {
               </span>
             </h1>
             
-            <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '200ms' }}>
               {language === 'es' 
                 ? 'Transformamos ideas en marcas extraordinarias que conquistan corazones y mercados. Cada proyecto es una obra maestra de creatividad y estrategia.'
                 : 'We transform ideas into extraordinary brands that conquer hearts and markets. Every project is a masterpiece of creativity and strategy.'
@@ -173,12 +193,12 @@ const About = () => {
             </p>
 
             {/* Stats con efectos neón mejorados */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
               {achievements.map((achievement, index) => (
                 <div
                   key={achievement.label}
-                  className={`group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in hover:shadow-2xl ${achievement.neonColor} hover:shadow-2xl`}
-                  style={{ animationDelay: `${500 + index * 100}ms` }}
+                  className={`group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0 hover:shadow-2xl ${achievement.neonColor} hover:shadow-2xl`}
+                  style={{ transitionDelay: `${400 + index * 100}ms` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <achievement.icon className="text-brand-teal mb-4 mx-auto group-hover:scale-110 transition-transform drop-shadow-sm group-hover:drop-shadow-lg group-hover:shadow-brand-teal/50" size={28} />
@@ -194,17 +214,17 @@ const About = () => {
         </div>
       </section>
 
-      {/* Sección Valores - Con toques neón */}
+      {/* Sección Valores - Con toques neón y animaciones */}
       <section className="py-20 bg-gray-50 dark:bg-brand-dark-light relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-brand-dark dark:text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-brand-dark dark:text-white mb-6 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
               <span className="bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent drop-shadow-lg">
                 {language === 'es' ? 'Nuestros' : 'Our'}
               </span>{' '}
               {language === 'es' ? 'Valores' : 'Values'}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
               {language === 'es' 
                 ? 'Los principios que impulsan cada decisión creativa y definen nuestra identidad como agencia.'
                 : 'The principles that drive every creative decision and define our identity as an agency.'
@@ -216,8 +236,8 @@ const About = () => {
             {values.map((value, index) => (
               <div
                 key={value.title}
-                className={`group relative p-8 bg-white dark:bg-brand-dark rounded-3xl border border-gray-200 dark:border-gray-800 hover:border-transparent transition-all duration-500 hover:transform hover:scale-105 animate-fade-in overflow-hidden hover:shadow-2xl ${value.neonColor}`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`group relative p-8 bg-white dark:bg-brand-dark rounded-3xl border border-gray-200 dark:border-gray-800 hover:border-transparent transition-all duration-500 hover:transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0 overflow-hidden hover:shadow-2xl ${value.neonColor}`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Fondo gradiente animado con neón */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
@@ -247,17 +267,17 @@ const About = () => {
         </div>
       </section>
 
-      {/* Sección Team - Corregida la superposición y con efectos neón */}
+      {/* Sección Team - Corregida la superposición y con efectos neón y animaciones */}
       <section className="py-20 bg-white dark:bg-brand-dark">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-brand-dark dark:text-white mb-6">
+            <h2 className="text-5xl md:text-6xl font-bold text-brand-dark dark:text-white mb-6 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
               {language === 'es' ? 'Mentes' : 'Creative'}{' '}
               <span className="bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent drop-shadow-lg">
                 {language === 'es' ? 'Creativas' : 'Minds'}
               </span>
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
               {language === 'es' 
                 ? 'El equipo de visionarios que da vida a las marcas más memorables.'
                 : 'The team of visionaries who bring the most memorable brands to life.'
@@ -269,8 +289,8 @@ const About = () => {
             {team.map((member, index) => (
               <div
                 key={member.name}
-                className="group text-center animate-fade-in"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="group text-center animate-on-scroll translate-y-20 opacity-0 transition-all duration-700"
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="relative mb-12">
                   {/* Marco decorativo con neón */}
@@ -314,7 +334,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section - Con efectos neón intensificados */}
+      {/* CTA Section - Con efectos neón intensificados y animaciones */}
       <section className="relative py-20 bg-gradient-to-br from-brand-teal via-purple-600 to-pink-600 overflow-hidden">
         {/* Elementos decorativos de fondo con neón */}
         <div className="absolute inset-0">
@@ -324,12 +344,12 @@ const About = () => {
         </div>
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 text-white/80 text-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 text-white/80 text-sm font-semibold mb-6 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
             <Rocket size={16} className="drop-shadow-sm" />
             {language === 'es' ? 'EMPECEMOS ALGO INCREÍBLE' : 'LET\'S START SOMETHING AMAZING'}
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
             {language === 'es' ? '¿Listo para crear' : 'Ready to create'}{' '}
             <span className="relative">
               {language === 'es' ? 'magia' : 'magic'}
@@ -338,7 +358,7 @@ const About = () => {
             {language === 'es' ? '?' : '?'}
           </h2>
           
-          <p className="text-xl text-white/90 mb-10 leading-relaxed drop-shadow-sm">
+          <p className="text-xl text-white/90 mb-10 leading-relaxed drop-shadow-sm animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '200ms' }}>
             {language === 'es' 
               ? 'Transformemos tu visión en una marca que inspire, conecte y conquiste. El futuro de tu marca comienza aquí.'
               : 'Let\'s transform your vision into a brand that inspires, connects and conquers. The future of your brand starts here.'
@@ -346,8 +366,9 @@ const About = () => {
           </p>
           
           <button 
-            className="group relative inline-flex items-center gap-3 bg-white text-brand-dark px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-white/25 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-white/30"
+            className="group relative inline-flex items-center gap-3 bg-white text-brand-dark px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-white/25 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-white/30 animate-on-scroll translate-y-20 opacity-0"
             onClick={() => handleNavigation('/', 'contact')}
+            style={{ transitionDelay: '300ms' }}
           >
             <Sparkles className="group-hover:rotate-12 transition-transform drop-shadow-sm" size={20} />
             {language === 'es' ? 'Crear mi marca' : 'Create my brand'}
