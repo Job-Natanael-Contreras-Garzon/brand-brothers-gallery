@@ -109,31 +109,28 @@ export const About: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-purple-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '500ms' }}>
+                  <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-purple-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '500ms' }}>
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">98%</div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent mb-2">98%</div>
                     <div className="text-gray-500 dark:text-gray-400 text-sm">
                       {getValueText('about.stats.clients', 'Clientes satisfechos')}
                     </div>
                   </div>
                 </div>
-                
-                <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-green-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '600ms' }}>
+                  <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-green-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '600ms' }}>
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">24/7</div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent mb-2">24/7</div>
                     <div className="text-gray-500 dark:text-gray-400 text-sm">
                       {getValueText('about.stats.support', 'Soporte disponible')}
                     </div>
                   </div>
                 </div>
-                
-                <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '700ms' }}>
+                  <div className="group relative p-6 bg-white/80 dark:bg-brand-dark-light/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/40 animate-on-scroll translate-y-20 opacity-0" style={{ transitionDelay: '700ms' }}>
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent mb-2">5+</div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-brand-teal to-purple-600 bg-clip-text text-transparent mb-2">5+</div>
                     <div className="text-gray-500 dark:text-gray-400 text-sm">
                       {getValueText('about.stats.experience', 'Años de experiencia')}
                     </div>
