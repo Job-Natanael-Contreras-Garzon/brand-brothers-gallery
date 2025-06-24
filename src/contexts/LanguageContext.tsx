@@ -52,6 +52,11 @@ const translations = {
     'services.marketing.features.0': 'Gestión de redes sociales',
     'services.marketing.features.1': 'Campañas de email marketing',
     'services.marketing.features.2': 'Publicidad online',
+
+    // CTA
+    'cta.title': '¿Interesado en trabajar con nosotros?',
+    'cta.subtitle': 'Comience una conversacion ahora',
+    'cta.button': 'Contáctanos',
     
     // Portfolio
     'portfolio.title': 'Nuestro Portfolio',
@@ -115,6 +120,8 @@ const translations = {
     'footer.rights': 'Todos los derechos reservados.',
   },
   en: {
+
+    
     // Navigation
     'nav.home': 'Home',
     'nav.company': 'Company',
@@ -157,7 +164,11 @@ const translations = {
     'services.marketing.features.1': 'Email marketing campaigns',
     'services.marketing.features.2': 'Online advertising',
     
-    
+    // CTA
+    'cta.title': 'Interested in working with us?',
+    'cta.subtitle': 'Start a conversation now',
+    'cta.button': 'Contact us',
+
     // Portfolio
     'portfolio.title': 'Our Portfolio',
     'portfolio.subtitle': 'Discover our portfolio of brand transformations. Each project represents our commitment to creating memorable and impactful brand experiences.',
