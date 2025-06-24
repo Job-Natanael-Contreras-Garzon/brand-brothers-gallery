@@ -2,6 +2,8 @@
 import React, { useEffect } from 'react';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const blogPosts = [
   {
@@ -44,6 +46,8 @@ const blogPosts = [
 
 export const Blog: React.FC = () => {
   const { t, language } = useLanguage();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -138,7 +142,9 @@ export const Blog: React.FC = () => {
 
           {/* CTA */}
           <div className="text-center animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '500ms' }}>
-            <button className="border-2 border-brand-teal text-brand-teal px-8 py-4 rounded-full font-semibold hover:bg-brand-teal hover:text-white dark:hover:text-brand-dark transition-all duration-300">
+            <button
+            onClick={() => navigate('/blog')}
+            className="border-2 border-brand-teal text-brand-teal px-8 py-4 rounded-full font-semibold hover:bg-brand-teal hover:text-white dark:hover:text-brand-dark transition-all duration-300">
               {t('blog.viewAll')}
             </button>
           </div>

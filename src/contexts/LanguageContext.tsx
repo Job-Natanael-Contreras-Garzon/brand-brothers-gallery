@@ -38,7 +38,6 @@ const translations = {
     // Services
     'services.title': 'Nuestros Servicios',
     'services.subtitle': 'Ofrecemos soluciones integrales de branding y marketing digital para hacer crecer tu negocio.',
-    'services.cta': 'Solicita una consulta gratuita',
     'services.branding.title': 'Branding & Marketing',
     'services.branding.description': 'Creamos identidades visuales únicas que reflejan la esencia de tu empresa.',
     'services.branding.detailedDescription': 'Nuestro servicio de branding abarca desde la conceptualización de tu marca hasta la entrega de un manual completo, asegurando coherencia y reconocimiento en todos los puntos de contacto.',
@@ -153,7 +152,6 @@ const translations = {
     // Services
     'services.title': 'Our Services',
     'services.subtitle': 'We offer comprehensive branding and digital marketing solutions to grow your business.',
-    'services.cta': 'Request a free consultation',
     'services.branding.title': 'Branding & Marketing',
     'services.branding.description': 'We create unique visual identities that reflect the essence of your company.',
     'services.branding.detailedDescription': 'Nuestro servicio de branding abarca desde la conceptualización de tu marca hasta la entrega de un manual completo, asegurando coherencia y reconocimiento en todos los puntos de contacto.',
