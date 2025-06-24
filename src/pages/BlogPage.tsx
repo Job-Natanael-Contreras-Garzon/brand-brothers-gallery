@@ -1,278 +1,188 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
-import { Footer } from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Calendar, User, ArrowRight, Search, Filter, Clock } from 'lucide-react';
-
-const blogPosts = [
-  {
-    id: 1,
-    title: '10 Tendencias de Diseño para 2024',
-    titleEn: '10 Design Trends for 2024',
-    excerpt: 'Descubre las últimas tendencias en diseño gráfico y branding que dominarán este año. Desde colores vibrantes hasta tipografías experimentales.',
-    excerptEn: 'Discover the latest trends in graphic design and branding that will dominate this year. From vibrant colors to experimental typography.',
-    content: 'El mundo del diseño está en constante evolución, y 2024 promete ser un año revolucionario...',
-    contentEn: 'The design world is constantly evolving, and 2024 promises to be a revolutionary year...',
-    author: 'María González',
-    date: '15 Mar 2024',
-    readTime: '8 min',
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop&crop=center',
-    category: 'Diseño',
-    categoryEn: 'Design',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Cómo Crear una Estrategia de Marca Exitosa',
-    titleEn: 'How to Create a Successful Brand Strategy',
-    excerpt: 'Guía completa para desarrollar una estrategia de marca que conecte con tu audiencia y genere resultados medibles.',
-    excerptEn: 'Complete guide to develop a brand strategy that connects with your audience and generates measurable results.',
-    content: 'Una estrategia de marca sólida es la base de cualquier negocio exitoso...',
-    contentEn: 'A solid brand strategy is the foundation of any successful business...',
-    author: 'Carlos Rodríguez',
-    date: '10 Mar 2024',
-    readTime: '12 min',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&crop=center',
-    category: 'Estrategia',
-    categoryEn: 'Strategy',
-    featured: false
-  },
-  {
-    id: 3,
-    title: 'El Futuro del Marketing Digital',
-    titleEn: 'The Future of Digital Marketing',
-    excerpt: 'Análisis profundo de las tecnologías emergentes que están transformando el panorama del marketing digital.',
-    excerptEn: 'In-depth analysis of emerging technologies that are transforming the digital marketing landscape.',
-    content: 'El marketing digital está experimentando una transformación radical...',
-    contentEn: 'Digital marketing is undergoing a radical transformation...',
-    author: 'Ana López',
-    date: '5 Mar 2024',
-    readTime: '10 min',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center',
-    category: 'Marketing',
-    categoryEn: 'Marketing',
-    featured: true
-  },
-  // Add more blog posts...
-  {
-    id: 4,
-    title: 'Psicología del Color en el Branding',
-    titleEn: 'Color Psychology in Branding',
-    excerpt: 'Cómo los colores influyen en las decisiones de compra y la percepción de marca.',
-    excerptEn: 'How colors influence purchasing decisions and brand perception.',
-    author: 'Diego Martín',
-    date: '28 Feb 2024',
-    readTime: '6 min',
-    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop&crop=center',
-    category: 'Diseño',
-    categoryEn: 'Design',
-    featured: false
-  }
-];
-
-const categories = ['Todos', 'Diseño', 'Estrategia', 'Marketing', 'Tendencias'];
-const categoriesEn = ['All', 'Design', 'Strategy', 'Marketing', 'Trends'];
+import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Footer } from '@/components/Footer';
 
 const BlogPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
-  const { t, language } = useLanguage();
+  const { language, t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string, sectionId?: string) => {
+    navigate(path);
+    if (sectionId) {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  const blogPosts = [
+    {
+      id: 1,
+      title: '10 Tendencias de Diseño para 2024',
+      titleEn: '10 Design Trends for 2024',
+      excerpt: 'Descubre las últimas tendencias en diseño gráfico y branding que dominarán este año.',
+      excerptEn: 'Discover the latest trends in graphic design and branding that will dominate this year.',
+      image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop&crop=center',
+      date: '15 Mar 2024',
+    },
+    {
+      id: 2,
+      title: 'Cómo Crear una Estrategia de Marca Exitosa',
+      titleEn: 'How to Create a Successful Brand Strategy',
+      excerpt: 'Guía completa para desarrollar una estrategia de marca que conecte con tu audiencia.',
+      excerptEn: 'Complete guide to develop a brand strategy that connects with your audience.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&crop=center',
+      date: '10 Mar 2024',
+    },
+    {
+      id: 3,
+      title: 'El Futuro del Marketing Digital',
+      titleEn: 'The Future of Digital Marketing',
+      excerpt: 'Análisis de las tecnologías emergentes que están transformando el panorama del marketing.',
+      excerptEn: 'Analysis of emerging technologies that are transforming the marketing landscape.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center',
+      date: '5 Mar 2024',
+    },
+    {
+      id: 4,
+      title: 'Psicología del Color en el Branding',
+      titleEn: 'Color Psychology in Branding',
+      excerpt: 'Cómo los colores influyen en las decisiones de compra y la percepción de marca.',
+      excerptEn: 'How colors influence purchasing decisions and brand perception.',
+      image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop&crop=center',
+      date: '28 Feb 2024',
+    },
+    {
+      id: 5,
+      title: 'La Importancia de la UI/UX en el Éxito del Producto',
+      titleEn: 'The Importance of UI/UX in Product Success',
+      excerpt: 'Un buen diseño no es solo cómo se ve, sino cómo funciona. Exploramos por qué la UI/UX es vital.',
+      excerptEn: 'Good design is not just how it looks, but how it works. We explore why UI/UX is vital.',
+      image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&h=600&fit=crop&crop=center',
+      date: '20 Feb 2024',
+    },
+    {
+      id: 6,
+      title: 'Storytelling: Conectando Marcas con Corazones',
+      titleEn: 'Storytelling: Connecting Brands with Hearts',
+      excerpt: 'Las historias venden. Aprende a construir una narrativa de marca que inspire y fidelice a tus clientes.',
+      excerptEn: 'Stories sell. Learn to build a brand narrative that inspires and retains your customers.',
+      image: 'https://images.unsplash.com/photo-1521714161819-15534968fc5f?w=800&h=600&fit=crop&crop=center',
+      date: '15 Feb 2024',
+    }
+  ];
 
   useEffect(() => {
-    let filtered = blogPosts;
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-20', 'scale-90');
+          entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+        }
+      });
+    }, { threshold: 0.1 });
 
-    // Filter by category
-    if (selectedCategory !== 'Todos' && selectedCategory !== 'All') {
-      filtered = filtered.filter(post => 
-        language === 'es' ? post.category === selectedCategory : post.categoryEn === selectedCategory
-      );
-    }
+    elements.forEach(element => {
+      observer.observe(element);
+    });
 
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(post =>
-        (language === 'es' ? post.title : post.titleEn).toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (language === 'es' ? post.excerpt : post.excerptEn).toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    setFilteredPosts(filtered);
-  }, [searchTerm, selectedCategory, language]);
-
-  const featuredPost = blogPosts.find(post => post.featured);
+    return () => elements.forEach(element => observer.unobserve(element));
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-brand-dark">
+    <div className="min-h-screen w-screen bg-gray-50 dark:bg-brand-dark-light text-brand-dark dark:text-white">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-brand-teal/10 to-transparent">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-7xl font-bold text-brand-dark dark:text-white mb-6">
-              {t('blog.title')}
+
+      <div className="flex flex-col md:flex-row w-full">
+        <aside className="hidden md:flex md:w-5/12 lg:w-4/12 flex-col justify-center sticky top-0 h-screen px-6 lg:px-12 xl:px-20">
+          <div className="w-full">
+            <div className="text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight">
+              <div><h1>BL</h1></div>
+              <div><h1>OG–</h1></div>
+              <div><h1>NEW</h1></div>
+              <div className='flex text-center items-center justify-center'>
+                <h1>S</h1>
+                <div className="mt-6 text-lg lg:text-xl font-light">
+                  
+                  
+                  <div>{language === 'es' ? 'Últimas Noticias' : 'Latest News'}</div>
+                  <div>{language === 'es' ? 'Y Actualizaciones' : 'and updates'}.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main className="w-full md:w-7/12 lg:w-8/12 flex flex-col items-center md:items-start py-12 md:pt-24">
+          
+          <div className="md:hidden text-center mb-12 px-4">
+            <h1 className="text-6xl font-bold">
+              {language === 'es' ? 'NUEVO' : 'NEWS'}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
-              Insights, tendencias y consejos expertos sobre branding, diseño y marketing digital. 
-              Mantente al día con las últimas innovaciones de la industria.
-            </p>
           </div>
 
-          {/* Search and Filter */}
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-              {/* Search */}
-              <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                <input
-                  type="text"
-                  placeholder={language === 'es' ? 'Buscar artículos...' : 'Search articles...'}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white dark:bg-brand-dark-light border border-gray-200 dark:border-gray-700 rounded-full focus:outline-none focus:border-brand-teal text-brand-dark dark:text-white"
-                />
-              </div>
-
-              {/* Category Filter */}
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-6 py-3 bg-white dark:bg-brand-dark-light border border-gray-200 dark:border-gray-700 rounded-full focus:outline-none focus:border-brand-teal text-brand-dark dark:text-white"
-              >
-                {(language === 'es' ? categories : categoriesEn).map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className="py-16 bg-gray-50 dark:bg-brand-dark-light">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <span className="text-brand-teal font-semibold text-sm uppercase tracking-wider">
-                {language === 'es' ? 'Artículo Destacado' : 'Featured Article'}
-              </span>
-            </div>
-            
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <img
-                  src={featuredPost.image}
-                  alt={language === 'es' ? featuredPost.title : featuredPost.titleEn}
-                  className="w-full h-80 object-cover rounded-2xl"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 text-xs font-medium bg-brand-teal text-brand-dark rounded-full">
-                    {language === 'es' ? featuredPost.category : featuredPost.categoryEn}
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-dark dark:text-white mb-4">
-                  {language === 'es' ? featuredPost.title : featuredPost.titleEn}
-                </h2>
-                <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                  {language === 'es' ? featuredPost.excerpt : featuredPost.excerptEn}
-                </p>
-
-                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-                  <div className="flex items-center space-x-1">
-                    <User size={14} />
-                    <span>{featuredPost.author}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Calendar size={14} />
-                    <span>{featuredPost.date}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Clock size={14} />
-                    <span>{featuredPost.readTime}</span>
-                  </div>
-                </div>
-
-                <button className="group flex items-center space-x-2 bg-brand-teal text-brand-dark px-6 py-3 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300">
-                  <span>{t('blog.readMore')}</span>
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Blog Posts Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.filter(post => !post.featured).map((post, index) => (
+          <div className="w-full max-w-3xl flex flex-col gap-12 px-4">
+            {blogPosts.map((post, index) => (
               <article
                 key={post.id}
-                className="group bg-white dark:bg-brand-dark-light rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="flex flex-col sm:flex-row bg-white dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-2xl transition-all duration-700 ease-in-out animate-on-scroll opacity-0 translate-y-20 scale-90"
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img 
-                    src={post.image} 
+                <div className="w-full sm:w-2/5 md:w-1/3 h-56 sm:h-auto flex-shrink-0">
+                  <img
+                    src={post.image}
                     alt={language === 'es' ? post.title : post.titleEn}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover w-full h-full"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-xs font-medium bg-brand-teal text-brand-dark rounded-full">
-                      {language === 'es' ? post.category : post.categoryEn}
-                    </span>
-                  </div>
                 </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-brand-teal transition-colors text-brand-dark dark:text-white">
-                    {language === 'es' ? post.title : post.titleEn}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                    {language === 'es' ? post.excerpt : post.excerptEn}
-                  </p>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <User size={14} />
-                        <span>{post.author}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Calendar size={14} />
-                        <span>{post.date}</span>
-                      </div>
+                <div className="w-full sm:w-3/5 md:w-2/3 flex flex-col justify-between p-6 lg:p-8">
+                  <div>
+                    <div className="text-xs text-gray-400 mb-3 uppercase tracking-widest">
+                      {post.date}
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock size={14} />
-                      <span>{post.readTime}</span>
-                    </div>
+                    <h2 className="text-xl lg:text-2xl font-bold mb-4 text-brand-dark dark:text-white leading-tight">
+                      {language === 'es' ? post.title : post.titleEn}
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm lg:text-base font-light mb-6">
+                      {language === 'es' ? post.excerpt : post.excerptEn}
+                    </p>
                   </div>
-
-                  <button className="group/btn flex items-center space-x-2 text-brand-teal hover:text-brand-teal-light transition-colors">
-                    <span>{t('blog.readMore')}</span>
-                    <ArrowRight className="group-hover/btn:translate-x-1 transition-transform" size={16} />
+                  <button
+                    className="self-start inline-flex items-center gap-2 bg-brand-teal text-brand-dark px-6 py-2.5 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300 text-sm"
+                    onClick={() => navigate(`/blog/${post.id}`)}
+                  >
+                    {t('blog.discoverButton')}
+                    <ArrowRight size={18} />
                   </button>
                 </div>
               </article>
             ))}
           </div>
+        </main>
+      </div>
 
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-gray-500 dark:text-gray-400 text-lg">
-                {language === 'es' ? 'No se encontraron artículos.' : 'No articles found.'}
-              </p>
-            </div>
-          )}
+      <section className="w-full bg-gray-100 dark:bg-brand-dark py-20 px-4">
+        <div className="text-center max-w-4xl mx-auto bg-white dark:bg-brand-dark-light p-10 md:p-16 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl">
+          <h2 className="text-3xl md:text-5xl font-bold text-brand-dark dark:text-white mb-4">
+            {t('cta.title')}
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            {t('cta.subtitle')}
+          </p>
+          <button 
+            onClick={() => handleNavigation('/', 'contact')}
+            className="group inline-flex items-center gap-3 bg-brand-teal text-brand-dark px-8 py-3 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300 shadow-lg transform hover:scale-105"
+          >
+            {t('cta.button')}
+            <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" size={20} />
+          </button>
         </div>
       </section>
 
