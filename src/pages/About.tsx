@@ -47,21 +47,20 @@ const About = () => {
       navigate(path);
     }
   };
-
   const values = [
     {
       icon: Palette,
       title: language === 'es' ? 'Creatividad' : 'Creativity',
       description: language === 'es' ? 'Transformamos ideas en experiencias visuales únicas que conectan.' : 'We transform ideas into unique visual experiences that connect.',
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-purple-600 to-indigo-600',
       neonColor: 'shadow-purple-500/50'
     },
     {
       icon: Zap,
       title: language === 'es' ? 'Innovación' : 'Innovation',
       description: language === 'es' ? 'Adoptamos las últimas tendencias y tecnologías del diseño.' : 'We adopt the latest design trends and technologies.',
-      color: 'from-yellow-500 to-orange-500',
-      neonColor: 'shadow-yellow-500/50'
+      color: 'from-blue-600 to-cyan-600',
+      neonColor: 'shadow-blue-500/50'
     },
     {
       icon: Target,
@@ -74,15 +73,15 @@ const About = () => {
       icon: Heart,
       title: language === 'es' ? 'Pasión' : 'Passion',
       description: language === 'es' ? 'Amamos lo que hacemos y se refleja en cada pixel.' : 'We love what we do and it shows in every pixel.',
-      color: 'from-red-500 to-pink-500',
-      neonColor: 'shadow-red-500/50'
+      color: 'from-indigo-600 to-purple-600',
+      neonColor: 'shadow-indigo-500/50'
     },
     {
       icon: Users,
       title: language === 'es' ? 'Colaboración' : 'Collaboration',
       description: language === 'es' ? 'Trabajamos como socios creativos con nuestros clientes.' : 'We work as creative partners with our clients.',
-      color: 'from-green-500 to-emerald-500',
-      neonColor: 'shadow-green-500/50'
+      color: 'from-teal-600 to-blue-600',
+      neonColor: 'shadow-teal-500/50'
     },
     {
       icon: Award,
@@ -92,7 +91,6 @@ const About = () => {
       neonColor: 'shadow-indigo-500/50'
     }
   ];
-
   const team = [
     {
       name: 'María González',
@@ -100,8 +98,8 @@ const About = () => {
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
       bio: language === 'es' ? 'Visionaria del diseño con 10+ años creando marcas icónicas.' : 'Design visionary with 10+ years creating iconic brands.',
       specialty: language === 'es' ? 'Branding Visual' : 'Visual Branding',
-      gradient: 'from-pink-500 to-violet-500',
-      neonGlow: 'shadow-pink-500/30'
+      gradient: 'from-purple-500 to-indigo-500',
+      neonGlow: 'shadow-purple-500/30'
     },
     {
       name: 'Carlos Rodríguez',
@@ -110,19 +108,17 @@ const About = () => {
       bio: language === 'es' ? 'Estratega digital que conecta marcas con audiencias globales.' : 'Digital strategist connecting brands with global audiences.',
       specialty: language === 'es' ? 'Marketing Digital' : 'Digital Marketing',
       gradient: 'from-blue-500 to-cyan-500',
-      neonGlow: 'shadow-cyan-500/30'
+      neonGlow: 'shadow-blue-500/30'
     },
     {
-      name: 'Ana López',
-      role: language === 'es' ? 'Directora de Crecimiento' : 'Growth Director',
+      name: 'Ana López',      role: language === 'es' ? 'Directora de Crecimiento' : 'Growth Director',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
       bio: language === 'es' ? 'Experta en escalar marcas y maximizar su impacto digital.' : 'Expert in scaling brands and maximizing digital impact.',
       specialty: language === 'es' ? 'Growth Hacking' : 'Growth Hacking',
-      gradient: 'from-emerald-500 to-teal-500',
-      neonGlow: 'shadow-emerald-500/30'
+      gradient: 'from-teal-500 to-blue-500',
+      neonGlow: 'shadow-teal-500/30'
     }
   ];
-
   const achievements = [
     {
       icon: Rocket,
@@ -143,27 +139,26 @@ const About = () => {
       number: '99%',
       label: language === 'es' ? 'Satisfacción' : 'Satisfaction',
       description: language === 'es' ? 'Clientes felices' : 'Happy clients',
-      neonColor: 'shadow-green-500/40'
+      neonColor: 'shadow-blue-500/40'
     },
     {
       icon: Award,
       number: '50+',
       label: language === 'es' ? 'Premios' : 'Awards',
       description: language === 'es' ? 'Reconocimientos' : 'Recognitions',
-      neonColor: 'shadow-yellow-500/40'
+      neonColor: 'shadow-indigo-500/40'
     }
   ];
 
   return (
     <div className="min-h-screen bg-white dark:bg-brand-dark overflow-x-hidden">
       <Navigation />
-      
-      {/* Hero Section - Con toques neón y animaciones */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-brand-teal/5 via-purple-50/30 to-pink-50/20 dark:from-brand-dark dark:via-brand-dark-light dark:to-brand-dark">
+        {/* Hero Section - Con toques neón y animaciones */}
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-brand-teal/5 via-blue-50/30 to-indigo-50/20 dark:from-brand-dark dark:via-brand-dark-light dark:to-brand-dark">
         {/* Elementos decorativos de fondo con neón */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-brand-teal/20 to-purple-500/20 rounded-full blur-3xl animate-pulse shadow-2xl shadow-brand-teal/20"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-pink-500/20 to-yellow-500/20 rounded-full blur-3xl animate-pulse shadow-2xl shadow-pink-500/20" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 rounded-full blur-3xl animate-pulse shadow-2xl shadow-blue-500/20" style={{ animationDelay: '1s' }}></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-teal-500/10 rounded-full blur-3xl animate-pulse shadow-2xl shadow-blue-500/10" style={{ animationDelay: '2s' }}></div>
         </div>
 
@@ -173,9 +168,8 @@ const About = () => {
               <Sparkles size={16} className="text-brand-teal drop-shadow-sm shadow-brand-teal/50" />
               {language === 'es' ? 'CREATIVOS • ESTRATEGAS • VISIONARIOS' : 'CREATIVES • STRATEGISTS • VISIONARIES'}
             </div>
-            
-            <h1 className="text-6xl md:text-8xl font-bold text-brand-dark dark:text-white mb-8 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
-              <span className="bg-gradient-to-r from-brand-teal via-purple-600 to-pink-600 bg-clip-text text-transparent drop-shadow-lg">
+              <h1 className="text-6xl md:text-8xl font-bold text-brand-dark dark:text-white mb-8 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '100ms' }}>
+              <span className="bg-gradient-to-r from-brand-teal via-purple-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-lg">
                 {language === 'es' ? 'Somos' : 'We Are'}
               </span>
               <br />
@@ -332,10 +326,8 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* CTA Section - Con efectos neón intensificados y animaciones */}
-      <section className="relative py-20 bg-gradient-to-br from-brand-teal via-purple-600 to-pink-600 overflow-hidden">
+      </section>      {/* CTA Section - Con efectos neón intensificados y animaciones */}
+      <section className="relative py-20 bg-gradient-to-br from-brand-teal via-purple-600 to-indigo-600 overflow-hidden">
         {/* Elementos decorativos de fondo con neón */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse shadow-2xl shadow-white/20"></div>
