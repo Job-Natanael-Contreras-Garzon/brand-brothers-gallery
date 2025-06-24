@@ -148,7 +148,7 @@ export const Services: React.FC = () => {
 
           {/* CTA */}
           <div className="text-center mt-16 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '800ms' }}>
-            <button className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300">
+            <button onClick={() => { closeModal(); handleNavigation('/', 'contact'); }} className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300">
               {t('services.cta') || 'Solicita una consulta gratuita'}
             </button>
           </div>

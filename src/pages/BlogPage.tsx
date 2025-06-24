@@ -132,7 +132,7 @@ const BlogPage = () => {
             {blogPosts.map((post, index) => (
               <article
                 key={post.id}
-                className="flex flex-col sm:flex-row bg-white dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-2xl transition-all duration-700 ease-in-out animate-on-scroll opacity-0 translate-y-20 scale-90"
+                className="flex flex-col sm:flex-row bg-white dark:bg-brand-dark rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg hover:[box-shadow:0_15px_30px_-12px_rgba(0,0,0,0.9)] transition-all duration-700 ease-in-out animate-on-scroll opacity-0 translate-y-20 -scale-150 hover:scale-[1.0125]"
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="w-full sm:w-2/5 md:w-1/3 h-56 sm:h-auto flex-shrink-0">
