@@ -103,7 +103,7 @@ const BlogPage = () => {
       <div className="flex flex-col md:flex-row w-full">
         <aside className="hidden md:flex md:w-5/12 lg:w-4/12 flex-col justify-center sticky top-0 h-screen px-6 lg:px-12 xl:px-20">
           <div className="w-full">
-            <div className="text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight">
+            <div className="text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight text-center">
               <div><h1>BL</h1></div>
               <div><h1>OG–</h1></div>
               <div><h1>NEW</h1></div>

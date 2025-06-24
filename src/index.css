@@ -123,6 +123,22 @@
     to {
       transform: translateX(-50%);
     }
+  }  
+
+  .animate-headerLLenar {
+    animation-name: headerLlenar;     
+    animation-fill-mode: both;        
+    animation-timing-function: linear;
+    animation-timeline: scroll();     
+  }
+  
+  @keyframes headerLlenar {
+    0% {
+      background: transparent;  
+    }
+    8%, 100%{
+      background: var(--background);        
+    }
   }
 
   .text-balance {
