@@ -75,7 +75,8 @@ const About = () => {
     {
       name: 'María González',
       role: language === 'es' ? 'Directora Creativa' : 'Creative Director',
-      image: '/lovable-uploads/a1bdcf9d-55cc-420c-9f92-85506d8a3341.png',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+
       bio: language === 'es' ? 'Visionaria del diseño con 10+ años creando marcas icónicas.' : 'Design visionary with 10+ years creating iconic brands.',
       specialty: language === 'es' ? 'Branding Visual' : 'Visual Branding',
       gradient: 'from-pink-500 to-violet-500',
@@ -94,6 +95,7 @@ const About = () => {
       name: 'Ana López',
       role: language === 'es' ? 'Directora de Crecimiento' : 'Growth Director',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+
       bio: language === 'es' ? 'Experta en escalar marcas y maximizar su impacto digital.' : 'Expert in scaling brands and maximizing digital impact.',
       specialty: language === 'es' ? 'Growth Hacking' : 'Growth Hacking',
       gradient: 'from-emerald-500 to-teal-500',
