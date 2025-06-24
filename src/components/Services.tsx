@@ -1,10 +1,38 @@
-
 import React, { useEffect } from 'react';
 import { Palette, Code, Megaphone, Camera, Search, BarChart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Services: React.FC = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const [selectedService, setSelectedService] = React.useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const openModal = (service: any) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+   const handleNavigation = (path: string, sectionId?: string) => {
+    if (path === '/') {
+      navigate('/');
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+    }
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,6 +61,7 @@ export const Services: React.FC = () => {
       icon: Palette,
       title: t('services.branding.title') || 'Diseño de Marca',
       description: t('services.branding.description') || 'Creamos identidades visuales únicas que reflejan la esencia de tu empresa.',
+      detailedDescription: t('services.branding.detailedDescription') || 'Nuestro servicio de branding abarca desde la conceptualización de tu marca hasta la entrega de un manual completo, asegurando coherencia y reconocimiento en todos los puntos de contacto.',
       features: [
         t('services.branding.features.0') || 'Logotipos únicos',
         t('services.branding.features.1') || 'Manual de marca completo',
@@ -43,6 +72,7 @@ export const Services: React.FC = () => {
       icon: Code,
       title: t('services.web.title') || 'Desarrollo Web',
       description: t('services.web.description') || 'Sitios web modernos, responsivos y optimizados para conversión.',
+      detailedDescription: t('services.web.detailedDescription') || 'Desarrollamos sitios web a medida, adaptados a tus necesidades y enfocados en la experiencia de usuario y la conversión de visitantes en clientes.',
       features: [
         t('services.web.features.0') || 'Diseño responsivo',
         t('services.web.features.1') || 'Tienda online (E-commerce)',
@@ -53,40 +83,11 @@ export const Services: React.FC = () => {
       icon: Megaphone,
       title: t('services.marketing.title') || 'Marketing Digital',
       description: t('services.marketing.description') || 'Estrategias digitales que impulsan el crecimiento de tu negocio.',
+      detailedDescription: t('services.marketing.detailedDescription') || 'Creamos campañas y estrategias digitales personalizadas para aumentar tu alcance, engagement y ventas, utilizando las últimas tendencias y herramientas.',
       features: [
         t('services.marketing.features.0') || 'Gestión de redes sociales',
         t('services.marketing.features.1') || 'Campañas de email marketing',
         t('services.marketing.features.2') || 'Publicidad online'
-      ]
-    },
-    {
-      icon: Camera,
-      title: t('services.photography.title') || 'Fotografía Comercial',
-      description: t('services.photography.description') || 'Imágenes profesionales que comunican la calidad de tu marca.',
-      features: [
-        t('services.photography.features.0') || 'Fotografía de producto',
-        t('services.photography.features.1') || 'Fotografía corporativa',
-        t('services.photography.features.2') || 'Cobertura de eventos'
-      ]
-    },
-    {
-      icon: Search,
-      title: t('services.seo.title') || 'SEO & SEM',
-      description: t('services.seo.description') || 'Mejoramos tu visibilidad online y aumentamos tu tráfico orgánico.',
-      features: [
-        t('services.seo.features.0') || 'Optimización para buscadores',
-        t('services.seo.features.1') || 'Campañas en Google Ads',
-        t('services.seo.features.2') || 'Análisis y reportes'
-      ]
-    },
-    {
-      icon: BarChart,
-      title: t('services.consulting.title') || 'Consultoría',
-      description: t('services.consulting.description') || 'Asesoramiento estratégico para el crecimiento de tu marca.',
-      features: [
-        t('services.consulting.features.0') || 'Análisis profundo de marca',
-        t('services.consulting.features.1') || 'Estrategia digital personalizada',
-        t('services.consulting.features.2') || 'Plan de marketing integral'
       ]
     }
   ];
@@ -110,7 +111,7 @@ export const Services: React.FC = () => {
             {services.map((service, index) => (
               <div
                 key={`service-${index}`}
-                className="group p-8 bg-white dark:bg-brand-dark rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0"
+                className="group relative p-8 bg-white dark:bg-brand-dark rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="w-16 h-16 bg-brand-teal/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-teal/30 transition-colors">
@@ -133,6 +134,14 @@ export const Services: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+                {/* Saber más button */}
+                <button
+                  className="opacity-0 group-hover:opacity-100 mt-6 bg-brand-teal text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 shadow-md"
+                  style={{ pointerEvents: 'auto' }}
+                  onClick={() => openModal(service)}
+                >
+                  Saber más <span className="ml-1">&rarr;</span>
+                </button>
               </div>
             ))}
           </div>
@@ -145,6 +154,49 @@ export const Services: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedService && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+          <div className="bg-white dark:bg-brand-dark rounded-2xl p-8 max-w-lg w-full shadow-2xl relative">
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-brand-teal text-2xl"
+              onClick={closeModal}
+              aria-label="Cerrar modal"
+            >
+              ×
+            </button>
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-brand-teal/20 rounded-2xl flex items-center justify-center mb-4">
+                <selectedService.icon className="text-brand-teal" size={40} />
+              </div>
+              <h2 className="text-3xl font-bold mb-2 text-center">{selectedService.title}</h2>
+              <hr className="w-16 border-brand-teal mb-4" />
+              <p className="text-gray-700 dark:text-gray-300 mb-4 text-center">{selectedService.detailedDescription || selectedService.description}</p>
+              <ul className="list-disc pl-4 text-left space-y-1 mb-8">
+                {selectedService.features.map((feature: string, idx: number) => (
+                  <li key={idx} className="text-gray-600 dark:text-gray-400">{feature}</li>
+                ))}
+              </ul>
+              {/* Botones de acción */}
+              <div className="flex w-full gap-4 mt-2">
+                <button
+                  onClick={() => { closeModal(); handleNavigation('/', 'contact'); }}
+                  className="flex-1 bg-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal-light transition-all duration-300 shadow"
+                >
+                  Contactar
+                </button>
+                <button
+                  onClick={() => { closeModal(); navigate('/portfolio'); }}
+                  className="flex-1 bg-brand-dark border border-brand-teal text-brand-teal py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
+                >
+                  Portafolio
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
