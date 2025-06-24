@@ -115,6 +115,100 @@
   }
 }
 
+/* Page transition animations */
+@keyframes pageEnter {
+  0% {
+    transform: translateY(20px) scale(0.98);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes pageExit {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: translateY(-20px) scale(1.02);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(56, 178, 172, 0.3), 
+                0 0 40px rgba(168, 85, 247, 0.2), 
+                0 0 60px rgba(236, 72, 153, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(56, 178, 172, 0.4), 
+                0 0 60px rgba(168, 85, 247, 0.3), 
+                0 0 80px rgba(236, 72, 153, 0.2);
+  }
+}
+
+@keyframes floatingElements {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+    opacity: 0.8;
+  }
+}
+
 .animate-slide-up {
   animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.8s ease-out forwards;
+}
+
+.animate-page-exit {
+  animation: pageExit 0.5s ease-in forwards;
+}
+
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.animate-floating {
+  animation: floatingElements 4s ease-in-out infinite;
+}
+
+/* Gradient borders */
+.border-gradient-to-br {
+  border-image: linear-gradient(135deg, rgba(56, 178, 172, 0.3), rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.3)) 1;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgb(56, 178, 172), rgb(168, 85, 247));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgb(56, 178, 172), rgb(236, 72, 153));
 }
