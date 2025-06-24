@@ -11,6 +11,11 @@ interface LanguageContextType {
 
 const translations = {
   es: {
+    'home.title': 'Lleva tu Marca al Siguiente Nivel',
+    'home.slogan': 'Donde las ideas brillantes se encuentran con una ejecución audaz. Somos los arquitectos del futuro digital de tu marca.',
+    'home.viewProjects': 'Ver Proyectos',
+    'home.letsTalk': 'Hablemos',
+
     // Navigation
     'nav.home': 'Inicio',
     'nav.company': 'Empresa',
@@ -127,6 +132,10 @@ const translations = {
     'footer.rights': 'Todos los derechos reservados.',
   },
   en: {
+    'home.title': 'Elevate Your Brand to the Next Level',
+    'home.slogan': "Where brilliant ideas meet bold execution. We are the architects of your brand's digital future.",
+    'home.viewProjects': 'View Projects',
+    'home.letsTalk': "Let's Talk",
     // Navigation
     'nav.home': 'Home',
     'nav.company': 'Company',

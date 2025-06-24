@@ -34,7 +34,7 @@ export const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-sm border-b border-gray-200/20 dark:border-brand-teal/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-sm border-b border-gray-200/20 dark:border-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}

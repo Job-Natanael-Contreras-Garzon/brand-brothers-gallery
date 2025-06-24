@@ -1,144 +1,127 @@
-
-export type FilterCategory = 'all' | 'branding' | 'digital' | 'packaging' | 'identity';
+// src/data/portfolioData.ts
+export type FilterCategory = 'all' | 'web' | 'mobile' | 'branding' | 'ai' | 'design' | 'development'; // Agrega o ajusta según tus necesidades
 
 export interface Project {
   id: string;
   title: string;
-  subtitle: string;
+  subtitle: string; // Nuevo
+  description: string;
+  image: string;
+  video?: string | null;
   category: FilterCategory;
   categoryName: string;
-  image: string;
-  video?: string; // Add optional video property
-  description: string;
-  challenge: string;
-  solution: string;
-  results: string[];
+  year: number;
   tags: string[];
-  year: string;
-  client: string;
+  featured: boolean; // Nuevo
+  likes: number; // Nuevo
+  views: number; // Nuevo
+  liveUrl?: string; // Opcional, para el botón "Ver Live Demo"
+  githubUrl?: string; // Opcional, para el botón "Ver Código"
+  client?: string;
+  challenge?: string;
+  solution?: string;
+  results?: string;
 }
 
 export const portfolioData: Project[] = [
   {
     id: '1',
-    title: 'TechFlow',
-    subtitle: 'Digital Innovation Platform',
-    category: 'branding',
-    categoryName: 'Brand Identity',
-    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=center',
-    description: 'A comprehensive brand identity for a cutting-edge technology startup focused on digital transformation.',
-    challenge: 'TechFlow needed to establish credibility in a crowded tech market while conveying innovation and reliability.',
-    solution: 'We created a modern, geometric logo with dynamic typography and a sophisticated color palette that reflects both innovation and trustworthiness.',
-    results: [
-      '40% increase in brand recognition',
-      '60% improvement in lead generation',
-      'Successfully raised Series A funding'
-    ],
-    tags: ['Logo Design', 'Brand Strategy', 'Visual Identity'],
-    year: '2024',
-    client: 'TechFlow Inc.'
+    title: 'Plataforma de E-commerce',
+    subtitle: 'Solución integral de comercio electrónico para B2C',
+    description: 'Desarrollo de una plataforma de e-commerce robusta y escalable, con funcionalidades avanzadas como gestión de inventario, pasarelas de pago integradas y un panel de administración intuitivo.',
+    image: '/images/ecommerce-platform.jpg', // Asegúrate de que las rutas de tus imágenes sean correctas
+    video: null,
+    category: 'web',
+    categoryName: 'Desarrollo Web',
+    year: 2024,
+    tags: ['Next.js', 'Stripe', 'MongoDB', 'TailwindCSS', 'TypeScript'],
+    featured: true,
+    likes: 47,
+    views: 1240,
+    liveUrl: 'https://example.com/ecommerce-demo',
+    githubUrl: 'https://github.com/your-repo/ecommerce'
   },
   {
     id: '2',
-    title: 'Eco Essence',
-    subtitle: 'Sustainable Beauty Brand',
-    category: 'packaging',
-    categoryName: 'Packaging Design',
-    image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&h=600&fit=crop&crop=center',
-    description: 'Sustainable packaging design for an eco-friendly beauty brand committed to environmental responsibility.',
-    challenge: 'Create premium packaging that reflects luxury while maintaining eco-friendly principles and cost-effectiveness.',
-    solution: 'Developed minimalist packaging using recycled materials with elegant typography and earthy color schemes.',
-    results: [
-      '25% reduction in packaging costs',
-      '80% improvement in customer satisfaction',
-      'Won sustainability packaging award'
-    ],
-    tags: ['Sustainable Design', 'Packaging', 'Beauty'],
-    year: '2024',
-    client: 'Eco Essence'
+    title: 'Aplicación Móvil de Banca',
+    subtitle: 'Banca en tu bolsillo: segura y accesible',
+    description: 'Diseño y desarrollo de una aplicación móvil bancaria con UX/UI simplificada, seguridad biométrica, y funcionalidades completas para transacciones, consultas y gestión de cuentas.',
+    image: '/images/mobile-banking-app.jpg',
+    video: null,
+    category: 'mobile',
+    categoryName: 'Aplicaciones Móviles',
+    year: 2024,
+    tags: ['React Native', 'Firebase', 'Node.js', 'OAuth2', 'TypeScript'],
+    featured: false,
+    likes: 32,
+    views: 890,
+    liveUrl: 'https://example.com/mobile-banking-demo',
+    githubUrl: 'https://github.com/your-repo/mobile-banking'
   },
   {
     id: '3',
-    title: 'Urban Eats',
-    subtitle: 'Food Delivery Platform',
-    category: 'digital',
-    categoryName: 'Digital Experience',
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=600&fit=crop&crop=center',
-    description: 'Complete digital brand experience for a revolutionary food delivery platform connecting local restaurants.',
-    challenge: 'Stand out in the competitive food delivery market while supporting local businesses and community connection.',
-    solution: 'Created a vibrant, community-focused brand with intuitive app design and local-first messaging strategy.',
-    results: [
-      '150% increase in app downloads',
-      '90% customer retention rate',
-      'Expanded to 5 new cities'
-    ],
-    tags: ['App Design', 'UX/UI', 'Food Tech'],
-    year: '2023',
-    client: 'Urban Eats'
+    title: 'Rediseño de Marca Corporativa',
+    subtitle: 'Nueva identidad visual para una startup tecnológica',
+    description: 'Proyecto integral de branding que abarcó desde la conceptualización de un nuevo logotipo hasta la creación de una guía de estilo completa, incluyendo tipografía, paleta de colores y elementos gráficos para una startup de IA.',
+    image: null ,
+    video: '/images/BrandingBrothers.mp4',
+    category: 'branding',
+    categoryName: 'Branding',
+    year: 2023,
+    tags: ['Adobe Illustrator', 'Figma', 'Brand Strategy', 'Logo Design'],
+    featured: true,
+    likes: 28,
+    views: 650
   },
   {
     id: '4',
-    title: 'Artisan Coffee Co.',
-    subtitle: 'Craft Coffee Roasters',
-    category: 'identity',
-    categoryName: 'Brand Identity',
-    image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=600&fit=crop&crop=center',
-    description: 'Authentic brand identity for artisan coffee roasters celebrating traditional craftsmanship and quality.',
-    challenge: 'Differentiate from mass-market coffee brands while honoring traditional roasting heritage.',
-    solution: 'Developed a handcrafted visual identity with custom typography and authentic storytelling approach.',
-    results: [
-      '200% increase in online sales',
-      'Featured in major coffee publications',
-      'Opened 3 new locations'
-    ],
-    tags: ['Logo Design', 'Typography', 'Craft Branding'],
-    year: '2023',
-    client: 'Artisan Coffee Co.'
+    title: 'Dashboard de Gestión SaaS',
+    subtitle: 'Panel de control intuitivo para análisis de datos',
+    description: 'Desarrollo de un dashboard interactivo para una plataforma SaaS, permitiendo a los usuarios visualizar métricas clave, gestionar suscripciones y obtener insights de datos en tiempo real.',
+    image: '/images/saas-dashboard.jpg',
+    video: null,
+    category: 'web',
+    categoryName: 'Desarrollo Web',
+    year: 2023,
+    tags: ['Vue.js', 'Chart.js', 'Node.js', 'PostgreSQL', 'AWS'],
+    featured: false,
+    likes: 41,
+    views: 1120,
+    liveUrl: 'https://example.com/saas-dashboard-demo',
+    githubUrl: 'https://github.com/your-repo/saas-dashboard'
   },
   {
     id: '5',
-    title: 'MindSpace',
-    subtitle: 'Mental Wellness Platform',
-    category: 'digital',
-    categoryName: 'Digital Experience',
-    image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=600&fit=crop&crop=center',
-    description: 'Calming digital experience design for a mental wellness platform focused on accessibility and empathy.',
-    challenge: 'Create a safe, welcoming digital space that reduces anxiety while providing effective wellness tools.',
-    solution: 'Designed with soft colors, intuitive navigation, and mindful user interactions prioritizing mental comfort.',
-    results: [
-      '70% improvement in user engagement',
-      '95% positive user feedback',
-      'Partnership with major healthcare providers'
-    ],
-    tags: ['Health Tech', 'UX Design', 'Accessibility'],
-    year: '2024',
-    client: 'MindSpace'
+    title: 'Experiencia AR de Compras',
+    subtitle: 'Prueba de productos en tiempo real con Realidad Aumentada',
+    description: 'Aplicación móvil innovadora que integra realidad aumentada para permitir a los usuarios visualizar cómo se verían los productos (ej. muebles, ropa) en su propio entorno antes de comprarlos.',
+    image: '/images/ar-shopping.jpg',
+    video: null,
+    category: 'mobile',
+    categoryName: 'Aplicaciones Móviles',
+    year: 2022,
+    tags: ['SwiftUI', 'ARKit', 'SceneKit', '3D Modeling'],
+    featured: true,
+    likes: 56,
+    views: 1580,
+    liveUrl: 'https://example.com/ar-shopping-demo',
+    githubUrl: 'https://github.com/your-repo/ar-shopping'
   },
   {
     id: '6',
-    title: 'Solar Dynamics',
-    subtitle: 'Renewable Energy Solutions',
-    category: 'branding',
-    categoryName: 'Brand Identity',
-    image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=600&fit=crop&crop=center',
-    description: 'Progressive brand identity for renewable energy company leading the transition to sustainable power.',
-    challenge: 'Communicate innovation and reliability in the rapidly evolving renewable energy sector.',
-    solution: 'Created a dynamic visual system representing energy flow with bold, forward-thinking design elements.',
-    results: [
-      'Secured $50M in new contracts',
-      '300% increase in brand awareness',
-      'Industry leadership recognition'
-    ],
-    tags: ['Energy', 'Sustainability', 'B2B Branding'],
-    year: '2023',
-    client: 'Solar Dynamics'
+    title: 'Plataforma de IA Conversacional',
+    subtitle: 'Bot de atención al cliente impulsado por NLP',
+    description: 'Creación de un chatbot inteligente para automatizar la atención al cliente, utilizando procesamiento de lenguaje natural (NLP) y machine learning para comprender y responder consultas de usuarios.',
+    image: '/images/ai-chatbot.jpg',
+    video: null,
+    category: 'ai',
+    categoryName: 'Inteligencia Artificial',
+    year: 2024,
+    tags: ['Python', 'TensorFlow', 'Rasa NLU', 'Dialogflow', 'React'],
+    featured: false,
+    likes: 73,
+    views: 2100,
+    liveUrl: 'https://example.com/ai-chatbot-demo',
+    githubUrl: 'https://github.com/your-repo/ai-chatbot'
   }
-];
-
-export const filterCategories = [
-  { key: 'all' as const, label: 'All Work' },
-  { key: 'branding' as const, label: 'Brand Identity' },
-  { key: 'digital' as const, label: 'Digital Experience' },
-  { key: 'packaging' as const, label: 'Packaging Design' },
-  { key: 'identity' as const, label: 'Visual Identity' }
 ];
