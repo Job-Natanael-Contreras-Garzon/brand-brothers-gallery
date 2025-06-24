@@ -10,7 +10,7 @@ interface FilterNavProps {
 
 export const FilterNav: React.FC<FilterNavProps> = ({ activeFilter, onFilterChange }) => {
   return (
-    <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-16">
+    <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-16 ">
       {filterCategories.map((category) => (
         <button
           key={category.key}

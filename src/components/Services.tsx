@@ -14,21 +14,7 @@ export const Services: React.FC = () => {
     setSelectedService(service);
     setIsModalOpen(true);
   };
-   const handleNavigation = (path: string, sectionId?: string) => {
-    if (path === '/') {
-      navigate('/');
-      if (sectionId) {
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      }
-    } else {
-      navigate(path);
-    }
-  };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
@@ -94,7 +80,7 @@ export const Services: React.FC = () => {
 
   return (
     <section id="services" className="w-full py-20 bg-gray-50 dark:bg-brand-dark-light text-brand-dark dark:text-white">
-      <div className="w-full px-6">
+      <div className="w-full px-6 ">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700">
@@ -111,7 +97,8 @@ export const Services: React.FC = () => {
             {services.map((service, index) => (
               <div
                 key={`service-${index}`}
-                className="group relative p-8 bg-white dark:bg-brand-dark rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 hover:transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0"
+                className="group relative p-8 bg-white dark:bg-brand-dark rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-brand-teal/50 transition-all duration-300 transform hover:scale-105 animate-on-scroll translate-y-20 opacity-0"
+
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="w-16 h-16 bg-brand-teal/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-teal/30 transition-colors">
@@ -148,7 +135,7 @@ export const Services: React.FC = () => {
 
           {/* CTA */}
           <div className="text-center mt-16 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '800ms' }}>
-            <button onClick={() => { closeModal(); handleNavigation('/', 'contact'); }} className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full font-semibold hover:bg-brand-teal-light transition-all duration-300">
+            <button className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full  font-semibold hover:bg-brand-teal-light transition-all duration-300">
               {t('services.cta') || 'Solicita una consulta gratuita'}
             </button>
           </div>
@@ -181,13 +168,13 @@ export const Services: React.FC = () => {
               {/* Botones de acción */}
               <div className="flex w-full gap-4 mt-2">
                 <button
-                  onClick={() => { closeModal(); handleNavigation('/', 'contact'); }}
+                  onClick={() => { closeModal(); navigate('/contacto'); }}
                   className="flex-1 bg-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal-light transition-all duration-300 shadow"
                 >
                   Contactar
                 </button>
                 <button
-                  onClick={() => { closeModal(); navigate('/portfolio'); }}
+                  onClick={() => { closeModal(); navigate('/portafolio'); }}
                   className="flex-1 bg-brand-dark border border-brand-teal text-brand-teal py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
                 >
                   Portafolio
