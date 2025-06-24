@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
 export const Services: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
 
   const [selectedService, setSelectedService] = React.useState<any>(null);
@@ -18,6 +18,22 @@ export const Services: React.FC = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
+  };
+
+   const handleNavigation = (path: string, sectionId?: string) => {
+    if (path === '/') {
+      navigate('/');
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+    }
   };
 
   useEffect(() => {
@@ -127,17 +143,10 @@ export const Services: React.FC = () => {
                   style={{ pointerEvents: 'auto' }}
                   onClick={() => openModal(service)}
                 >
-                  Saber más <span className="ml-1">&rarr;</span>
+                  {language === 'es' ? 'Saber más' : 'Learn more'} <span className="ml-1">&rarr;</span>
                 </button>
               </div>
             ))}
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-16 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '800ms' }}>
-            <button className="bg-brand-teal text-brand-dark px-8 py-4 rounded-full  font-semibold hover:bg-brand-teal-light transition-all duration-300">
-              {t('services.cta') || 'Solicita una consulta gratuita'}
-            </button>
           </div>
         </div>
       </div>
@@ -153,13 +162,13 @@ export const Services: React.FC = () => {
             >
               ×
             </button>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col ">
               <div className="w-16 h-16 bg-brand-teal/20 rounded-2xl flex items-center justify-center mb-4">
                 <selectedService.icon className="text-brand-teal" size={40} />
               </div>
-              <h2 className="text-3xl font-bold mb-2 text-center">{selectedService.title}</h2>
+              <h2 className="text-3xl font-bold mb-2">{selectedService.title}</h2>
               <hr className="w-16 border-brand-teal mb-4" />
-              <p className="text-gray-700 dark:text-gray-300 mb-4 text-center">{selectedService.detailedDescription || selectedService.description}</p>
+              <p className="text-gray-700 dark:text-gray-300 mb-4 ">{selectedService.detailedDescription || selectedService.description}</p>
               <ul className="list-disc pl-4 text-left space-y-1 mb-8">
                 {selectedService.features.map((feature: string, idx: number) => (
                   <li key={idx} className="text-gray-600 dark:text-gray-400">{feature}</li>
@@ -168,16 +177,16 @@ export const Services: React.FC = () => {
               {/* Botones de acción */}
               <div className="flex w-full gap-4 mt-2">
                 <button
-                  onClick={() => { closeModal(); navigate('/contacto'); }}
+                  onClick={() => { closeModal(); handleNavigation('/', 'contact'); }}
                   className="flex-1 bg-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal-light transition-all duration-300 shadow"
                 >
-                  Contactar
+                  {language === 'es' ? 'Contactar' : 'Contact'}
                 </button>
                 <button
                   onClick={() => { closeModal(); navigate('/portafolio'); }}
-                  className="flex-1 bg-brand-dark border border-brand-teal text-brand-teal py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
+                  className="flex-1 bg-brand-teal border border-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
                 >
-                  Portafolio
+                  {language === 'es' ? 'Portafolio' : 'Portfolio'}
                 </button>
               </div>
             </div>
