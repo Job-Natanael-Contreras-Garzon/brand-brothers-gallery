@@ -53,11 +53,13 @@ const translations = {
     'services.marketing.features.1': 'Campañas de email marketing',
     'services.marketing.features.2': 'Publicidad online',
 
-    // CTA
+    'services.photography.title': 'Fotografía Profesional',
+    'services.seo.title': 'Optimización SEO',
+        // CTA
     'cta.title': '¿Interesado en trabajar con nosotros?',
     'cta.subtitle': 'Comience una conversacion ahora',
     'cta.button': 'Contáctanos',
-    
+
     // Portfolio
     'portfolio.title': 'Nuestro Portfolio',
     'portfolio.subtitle': 'Descubre nuestro portfolio de transformaciones de marca. Cada proyecto representa nuestro compromiso de crear experiencias de marca memorables e impactantes.',
@@ -168,6 +170,10 @@ const translations = {
     'cta.title': 'Interested in working with us?',
     'cta.subtitle': 'Start a conversation now',
     'cta.button': 'Contact us',
+
+
+    'services.seo.title': 'SEO Optimization',
+    'services.photography.title': 'Professional Photography',
 
     // Portfolio
     'portfolio.title': 'Our Portfolio',
