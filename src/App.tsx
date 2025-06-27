@@ -6,8 +6,8 @@ import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import BlogPage from './pages/BlogPage';
 import NotFound from './pages/NotFound';
-import { Navigation } from './components/Navigation'; // Import Navigation
-
+import { Navigation } from './components/Navigation';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <Router>
+          <ScrollToTop />
           <Navigation />
           <main className="pt-10"> 
             <Routes>

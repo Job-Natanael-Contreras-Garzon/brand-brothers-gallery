@@ -16,25 +16,26 @@ export const Navigation: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavigation = (path: string, sectionId?: string) => {
-    if (path === '/') {
-      navigate('/');
+    if (path === '/' && location.pathname === '/') {
       if (sectionId) {
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
       navigate(path);
+      if (path === '/' && sectionId) {
+        setTimeout(() => {
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
     }
     setIsMenuOpen(false);
     setIsCompanyOpen(false);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-sm border-b border-gray-200/20 dark:border-transparent">
+    <nav id="main-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-sm border-b border-gray-200/20 dark:border-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
