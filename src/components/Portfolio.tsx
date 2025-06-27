@@ -3,10 +3,11 @@ import React, { useEffect } from 'react';
 import { ArrowRight, Play, Eye } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../contexts/LanguageContext';
+import { type Project } from '../data/portfolioData';
 import { useNavigate } from 'react-router-dom';
 
 export const Portfolio: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const Portfolio: React.FC = () => {
   }, []);
 
   // Show only featured projects (first 6)
-  const featuredProjects = portfolioData.slice(0, 6);
+  const featuredProjects: Project[] = portfolioData.slice(0, 6);
 
   return (
     <section id="portfolio" className="w-full py-20 bg-white dark:bg-brand-dark text-brand-dark dark:text-white">
@@ -82,7 +83,7 @@ export const Portfolio: React.FC = () => {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img 
                       src={project.image} 
-                      alt={project.title}
+                      alt={project.title[language]}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
@@ -93,7 +94,7 @@ export const Portfolio: React.FC = () => {
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 text-xs font-medium bg-brand-teal text-brand-dark rounded-full">
-                        {project.categoryName}
+                        {project.categoryName[language]}
                       </span>
                     </div>
 
@@ -108,10 +109,10 @@ export const Portfolio: React.FC = () => {
                   {/* Content */}
                   <div className="p-6">
                     <h3 className="text-xl md:text-2xl font-bold text-brand-dark dark:text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
-                      {project.title}
+                      {project.title[language]}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-4">
-                      {project.subtitle}
+                      {project.subtitle[language]}
                     </p>
                     
                     {/* Tags */}

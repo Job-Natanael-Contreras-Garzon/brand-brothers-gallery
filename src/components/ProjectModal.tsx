@@ -10,7 +10,9 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  if (!project) return null; // Early return if no project is selected
 
   useEffect(() => {
     if (isOpen) {
@@ -79,7 +81,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               ) : (
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={project.title[language]}
                   className="w-full h-full object-cover"
                 />
               )}
@@ -90,13 +92,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               {/* Info overlay solo en mobile - AHORA CON pointer-events-none */}
               <div className="absolute bottom-0 left-0 right-0 p-4 md:hidden pointer-events-none">
                 <span className="inline-block px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md mb-2 uppercase tracking-wider">
-                  {project.categoryName}
+                  {project.categoryName[language]}
                 </span>
                 <h2 className="text-xl font-bold text-white mb-1">
-                  {project.title}
+                  {project.title[language]}
                 </h2>
                 <p className="text-sm text-gray-300">
-                  {project.subtitle}
+                  {project.subtitle[language]}
                 </p>
               </div>
             </div>
@@ -110,17 +112,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               <div className="hidden md:block space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="inline-block px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md uppercase tracking-wider">
-                    {project.categoryName}
+                    {project.categoryName[language]}
                   </span>
                   <span className="text-gray-400 text-sm">{project.year}</span>
                 </div>
                 
                 <h2 className="text-2xl font-bold text-white leading-tight">
-                  {project.title}
+                  {project.title[language]}
                 </h2>
                 
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  {project.subtitle}
+                  {project.subtitle[language]}
                 </p>
               </div>
 
@@ -159,7 +161,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                   <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">
                     {t('portfolio.modal.client')}
                   </h4>
-                  <p className="text-white text-sm">{project.client}</p>
+                  <p className="text-white text-sm">{project.client?.[language]}</p>
                 </div>
 
                 {/* Services/Tags */}
@@ -185,7 +187,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                     {t('portfolio.modal.overview')}
                   </h4>
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    {project.description}
+                    {project.description[language]}
                   </p>
                 </div>
 
@@ -196,7 +198,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                       {t('portfolio.modal.challenge')}
                     </h4>
                     <p className="text-gray-300 text-sm leading-relaxed">
-                      {project.challenge}
+                      {project.challenge?.[language]}
                     </p>
                   </div>
                 )}
@@ -208,19 +210,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                       {t('portfolio.modal.solution')}
                     </h4>
                     <p className="text-gray-300 text-sm leading-relaxed">
-                      {project.solution}
+                      {project.solution?.[language]}
                     </p>
                   </div>
                 )}
 
                 {/* Results */}
-                {project.results && project.results.length > 0 && (
+                {project.results && project.results[language]?.length > 0 && (
                   <div>
                     <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
                       {t('portfolio.modal.results')}
                     </h4>
                     <ul className="space-y-2">
-                      {project.results.map((result, index) => (
+                      {project.results[language].map((result, index) => (
                         <li key={index} className="flex items-start text-gray-300 text-sm">
                           <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 mt-2 flex-shrink-0" />
                           <span>{result}</span>

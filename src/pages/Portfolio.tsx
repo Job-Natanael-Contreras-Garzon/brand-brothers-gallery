@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Footer } from '@/components/Footer';
@@ -9,7 +9,7 @@ import { portfolioData, type Project, type FilterCategory } from '@/data/portfol
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const ProjectCard = ({ project, index, viewedProjects, likedProjects, handleLike, handleShare, handleProjectClick }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <div
@@ -51,7 +51,7 @@ const ProjectCard = ({ project, index, viewedProjects, likedProjects, handleLike
             <>
               <img
                 src={project.image}
-                alt={project.title}
+                alt={project.title[language]}
                 className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 rounded-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500 rounded-2xl" />
@@ -63,7 +63,7 @@ const ProjectCard = ({ project, index, viewedProjects, likedProjects, handleLike
           <div className="absolute top-3 right-3">
             <span className="px-3 py-1 text-xs font-medium bg-white/20 backdrop-blur-sm text-white rounded-full border border-white/20 flex items-center space-x-1.5">
               <Tag size={12} />
-              <span>{project.categoryName}</span>
+              <span>{project.categoryName[language]}</span>
             </span>
           </div>
 
@@ -104,15 +104,13 @@ const ProjectCard = ({ project, index, viewedProjects, likedProjects, handleLike
           <div className="flex-grow">
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-2">{project.subtitle}</p>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors duration-300">{project.title[language]}</h3>
+                <p className="text-gray-400 text-sm">{project.subtitle[language]}</p>
               </div>
             </div>
 
             <p className="text-foreground/80 text-sm mb-4 line-clamp-2">
-              {project.description}
+              {project.description[language]}
             </p>
           </div>
 
@@ -160,13 +158,12 @@ const categories: { id: FilterCategory; name: string; count: number }[] = [
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(portfolioData);
-  const [viewedProjects, setViewedProjects] = useState<Set<string>>(new Set());
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'newest' | 'popular' | 'liked'>('newest');
   const [likedProjects, setLikedProjects] = useState<Set<string>>(new Set());
+  const [viewedProjects, setViewedProjects] = useState<Set<string>>(new Set());
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchParams] = useSearchParams();
 
   // **NUEVO ESTADO PARA EL MODO DE VISTA (Si lo vas a usar, déjalo, si no, puedes quitarlo)**
@@ -220,8 +217,7 @@ const Portfolio = () => {
     localStorage.setItem('likedProjects', JSON.stringify([...likedProjects]));
   }, [likedProjects]);
 
-  // Filter and sort projects logic
-  useEffect(() => {
+  const filteredProjects = useMemo(() => {
     let currentFiltered = portfolioData;
 
     // Category filter
@@ -230,35 +226,35 @@ const Portfolio = () => {
     }
 
     // Search filter
-    if (searchQuery) {
+    if (searchTerm) {
+      const lowercasedTerm = searchTerm.toLowerCase();
       currentFiltered = currentFiltered.filter(project =>
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        project.title[language].toLowerCase().includes(lowercasedTerm) ||
+        project.subtitle[language].toLowerCase().includes(lowercasedTerm) ||
+        project.description[language].toLowerCase().includes(lowercasedTerm) ||
+        project.categoryName[language].toLowerCase().includes(lowercasedTerm) ||
+        project.tags.some(tag => tag.toLowerCase().includes(lowercasedTerm))
       );
     }
 
     // Sort
-    switch (sortBy) {
-      case 'newest':
-        currentFiltered.sort((a, b) => b.year - a.year);
-        break;
-      case 'popular':
-        currentFiltered.sort((a, b) => b.views - a.views);
-        break;
-      case 'liked':
-        currentFiltered.sort((a, b) => {
-          const aLiked = likedProjects.has(a.id) ? a.likes + 1 : a.likes;
-          const bLiked = likedProjects.has(b.id) ? b.likes + 1 : b.likes;
-          return bLiked - aLiked;
-        });
-        break;
-      default:
-        break;
-    }
+    const sorted = [...currentFiltered].sort((a, b) => {
+        switch (sortBy) {
+            case 'newest':
+                return b.year - a.year;
+            case 'popular':
+                return b.views - a.views;
+            case 'liked':
+                const aLiked = likedProjects.has(a.id) ? a.likes + 1 : a.likes;
+                const bLiked = likedProjects.has(b.id) ? b.likes + 1 : b.likes;
+                return bLiked - aLiked;
+            default:
+                return 0;
+        }
+    });
 
-    setFilteredProjects(currentFiltered);
-  }, [activeFilter, searchQuery, sortBy, likedProjects]);
+    return sorted;
+  }, [activeFilter, searchTerm, sortBy, likedProjects, language]);
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
@@ -286,8 +282,8 @@ const Portfolio = () => {
     e.stopPropagation();
     if (navigator.share) {
       navigator.share({
-        title: project.title,
-        text: project.description,
+        title: project.title[language],
+        text: project.description[language],
         url: window.location.href
       }).catch((error) => console.error('Error sharing:', error));
     } else {
@@ -373,14 +369,14 @@ const Portfolio = () => {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Buscar proyectos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={language === 'es' ? 'Buscar proyectos...' : 'Search projects...'}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              {searchQuery && (
+              {searchTerm && (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => setSearchTerm('')}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   <X size={16} />
