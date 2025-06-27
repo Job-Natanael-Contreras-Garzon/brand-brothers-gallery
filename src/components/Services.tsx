@@ -68,7 +68,8 @@ export const Services: React.FC = () => {
         t('services.branding.features.0') || 'Logotipos únicos',
         t('services.branding.features.1') || 'Manual de marca completo',
         t('services.branding.features.2') || 'Papelería corporativa'
-      ]
+      ],
+      portfolioCategory: 'branding'
     },
     {
       icon: Code,
@@ -79,7 +80,8 @@ export const Services: React.FC = () => {
         t('services.web.features.0') || 'Diseño responsivo',
         t('services.web.features.1') || 'Tienda online (E-commerce)',
         t('services.web.features.2') || 'Sistema de gestión personalizado'
-      ]
+      ],
+      portfolioCategory: 'web'
     },
     {
       icon: Megaphone,
@@ -90,7 +92,8 @@ export const Services: React.FC = () => {
         t('services.marketing.features.0') || 'Gestión de redes sociales',
         t('services.marketing.features.1') || 'Campañas de email marketing',
         t('services.marketing.features.2') || 'Publicidad online'
-      ]
+      ],
+      portfolioCategory: 'branding'
     }
   ];
 
@@ -183,7 +186,7 @@ export const Services: React.FC = () => {
                   {language === 'es' ? 'Contactar' : 'Contact'}
                 </button>
                 <button
-                  onClick={() => { closeModal(); navigate('/portafolio'); }}
+                  onClick={() => { closeModal(); navigate(`/portfolio?filter=${selectedService.portfolioCategory}`); }}
                   className="flex-1 bg-brand-teal border border-brand-teal text-white py-2 rounded-lg font-semibold hover:bg-brand-teal hover:text-white transition-all duration-300 shadow"
                 >
                   {language === 'es' ? 'Portafolio' : 'Portfolio'}

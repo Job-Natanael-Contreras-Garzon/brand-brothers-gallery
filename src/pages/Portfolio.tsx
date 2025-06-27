@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { Footer } from '@/components/Footer';
 // Importa el ProjectModal desde su archivo dedicado. Asegúrate de que la ruta sea correcta.
@@ -166,11 +167,39 @@ const Portfolio = () => {
   const [likedProjects, setLikedProjects] = useState<Set<string>>(new Set());
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { t } = useLanguage();
+  const [searchParams] = useSearchParams();
 
   // **NUEVO ESTADO PARA EL MODO DE VISTA (Si lo vas a usar, déjalo, si no, puedes quitarlo)**
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid'); // Estado para 'grid' o 'list'
 
-  // Load viewed and liked projects from localStorage
+  // Effect to handle filter from URL
+  useEffect(() => {
+    const filterFromUrl = searchParams.get('filter') as FilterCategory;
+    if (filterFromUrl && categories.some(c => c.id === filterFromUrl)) {
+      setActiveFilter(filterFromUrl);
+      // Scroll to the project grid with an offset for the sticky header
+      setTimeout(() => {
+        const gridElement = document.getElementById('project-grid');
+        const controlsElement = document.getElementById('portfolio-controls');
+
+        if (gridElement && controlsElement) {
+          const controlsHeight = controlsElement.offsetHeight;
+          // Extra space so the content isn't glued to the bar
+          const extraPadding = 20; 
+          const topPos = gridElement.getBoundingClientRect().top + window.scrollY - controlsHeight - extraPadding;
+          
+          window.scrollTo({
+            top: topPos,
+            behavior: 'smooth'
+          });
+        } else if (gridElement) {
+          // Fallback if controls are not found
+          gridElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [searchParams, categories]);
+
   useEffect(() => {
     const savedViewed = localStorage.getItem('viewedProjects');
     if (savedViewed) {
@@ -335,7 +364,7 @@ const Portfolio = () => {
           Si tu Navbar es fijo y NO tiene un z-index más alto que z-40, necesitarás
           darle a tu Navbar un z-index de z-50 o z-[whatever-number-is-higher].
       */}
-      <section className="py-4 bg-card/50 backdrop-blur-sm sticky top-[64px] z-40 border-b border-border"> {/* top-[64px] es un ejemplo */}
+      <section id="portfolio-controls" className="py-4 bg-card/50 backdrop-blur-sm sticky top-[64px] z-40 border-b border-border"> {/* top-[64px] es un ejemplo */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             {/* Search */}
@@ -393,7 +422,7 @@ const Portfolio = () => {
       </section>
 
       {/* Filters and Project Grid */}
-      <section className="py-16 bg-background">
+      <section id="project-grid" className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
