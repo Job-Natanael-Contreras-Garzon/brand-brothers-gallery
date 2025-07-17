@@ -166,19 +166,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-brand-teal mb-2">Teléfono</h4>
-                    <p className="text-gray-600 dark:text-gray-300">+34 912 345 678</p>
-                    <p className="text-gray-600 dark:text-gray-300">+34 687 654 321</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4 animate-on-scroll translate-y-20 opacity-0 transition-all duration-700" style={{ transitionDelay: '700ms' }}>
-                  <div className="w-12 h-12 bg-brand-teal/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-brand-teal" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-brand-teal mb-2">Oficina</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Calle Gran Vía, 45</p>
-                    <p className="text-gray-600 dark:text-gray-300">28013 Madrid, España</p>
+                    <p className="text-gray-600 dark:text-gray-300">+591 78504107</p>
                   </div>
                 </div>
               </div>
